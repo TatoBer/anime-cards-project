@@ -1,0 +1,21 @@
+.login-span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 25px;
+}
+
+.login-span p {
+    opacity: .8;
+}
+
+.login-div.white-box {
+    padding: 40px 60px;
+    margin: 50px 0 0 0;
+}
+
+.login-div button {
+    margin: 11px 0;
+}

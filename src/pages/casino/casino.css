@@ -1,0 +1,64 @@
+.casino-app > .balance {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.app.casino-app {
+   justify-content: center;
+}
+
+.app.casino-app > .coinflip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient( transparent 0%, #27224963 100% );
+    padding: 35px;
+    border-radius: 10px;
+}
+
+.coinflip > section {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.casino-app > .coinflip > section > .coins {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.coinflip > section > .coins > .coin {
+    margin: 15px;
+}
+
+.coinflip > section > .result {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: linear-gradient( #27224998 0%, #27224900 100% );
+}
+
+.coinflip > section > .result > svg {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    transform: translateY(-190px);
+    transition: transform .3s ease;
+    opacity: .8;
+}
+
+.coinflip > section > .result > svg.enter {
+    transform: translateY(0px);
+}

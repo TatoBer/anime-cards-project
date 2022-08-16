@@ -1,0 +1,34 @@
+.loading-fullscreen {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s ease;
+  pointer-events: all;
+  z-index: 99999;
+}
+
+.loading-fullscreen.off {
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+}
+
+.loading-fullscreen svg {
+    animation: rotation 1s cubic-bezier(0.34, 0.93, 0.72, 0.53) infinite;
+    font-size: 6vw;
+    color: var(--white);
+    opacity: .8;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

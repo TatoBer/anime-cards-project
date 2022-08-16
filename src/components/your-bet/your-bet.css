@@ -1,0 +1,72 @@
+  .your-bet {
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      border: 2px solid var(--primary-color);
+      user-select: none;
+      transition: transform .2s ease;
+      position: relative;
+      /* width: 230px; */
+  }
+
+  .your-bet > div > h4 {
+      font-family: var(--secondary-font);
+      font-size: 18px;
+      color: var(--semi-black);
+      transition: color .3s ease;
+      z-index: 2;
+      margin-right: 15px;
+  }
+
+  .your-bet > input {
+      height: 100%;
+      padding: 10px;
+      border-radius: 150px;
+      background-color: var(--semi-black);
+      font-weight: bold;
+      font-size: 18px;
+      outline: none;
+      color: var(--white);
+      border: none;
+      text-align: center;
+      z-index: 2;
+  }
+
+  .your-bet > div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 5px 0;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  .your-bet > div > span {
+    background: var(--bg);
+    animation: var(--bg-animation);
+    opacity: .8;
+    padding: 5px;
+    border-radius: 10px;
+    z-index: 1;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+    transition: opacity .2s ease;
+  }
+
+  .your-bet > div > span:hover {
+    opacity: .5;
+  }
+
+  .your-bet > input::-webkit-outer-spin-button,
+  .your-bet > input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .your-bet > input[type=number] {
+    -moz-appearance: textfield;
+  }

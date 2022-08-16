@@ -1,0 +1,82 @@
+.list-card {
+    overflow: hidden;
+    background: linear-gradient(220.55deg, rgb(190, 197, 204) 0%, var(--white) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 20px;
+    border-radius: 30px;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 3px 3px 10px -5px #27224981, inset 3px 3px 10px #27224952;
+    border: 3px solid var(--primary-color);
+    transition: all .3s ease;
+}
+
+.list-card.epic {
+    border: 2px solid var(--legendary);
+    box-shadow: 3px 3px 10px -5px #27224981, inset 3px 3px 10px #27224952, 0px 0px 10px -2px #dfd87e;
+}
+
+.list-card > * {
+    color: var(--semi-black);
+}
+
+.list-card.off {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.list-card > div {
+    overflow: hidden;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-card > span {
+  background-color: rgb(223, 232, 240);
+  color: var(--semi-black);
+  padding: 5px 9px 10px 15px;
+  border: none;
+  border-radius: 25px 0 0 25px;
+  font-style: italic;
+  box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224928;
+}
+
+.list-card > div > img {
+    height: 100%;
+}
+
+.list-card > div > svg {
+  font-size: 35px;
+  color: var(--semi-black);
+  animation: rotation .5s cubic-bezier(0.34, 0.93, 0.72, 0.53) infinite;
+  opacity: .7;
+}
+
+.list-card > h3 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin: 0 50px;
+}
+
+.list-card > h3 > small {
+    opacity: .8;
+    color: var(--semi-black);
+}
+
+.list-card > h3 > strong {
+    color: var(--semi-black);
+    font-size: 19px;
+}
+
+
+  

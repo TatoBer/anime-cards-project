@@ -1,0 +1,36 @@
+.nav-lateral {
+    background-color: var(--white);
+    height: 100vh;
+    position: relative;
+    left: 0;
+    padding-top: 5px;
+    box-shadow: -13px 0px 11px 14px #27224950, inset 3px 3px 10px #27224952;
+
+    /* border-radius: 0 8px 8px 0; */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+
+    z-index: 150000;
+    border-right: 2px solid var(--primary-color);
+}
+
+.nav-lateral > a > svg, .nav-lateral > svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 7px;
+    margin: 5px 10px;
+    color: var(--semi-black);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color .2s ease, transform .2s ease;
+}
+
+.nav-lateral > a > svg:hover, .nav-lateral > svg:hover {
+    background-color: #18134136;
+    transform: scale(1.05);
+}

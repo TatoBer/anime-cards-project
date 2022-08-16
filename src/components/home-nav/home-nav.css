@@ -1,0 +1,36 @@
+.home-nav {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    padding: 0 17px;
+}
+
+.home-nav > .ancors {
+    padding: 7px 7px;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25px;
+    border-radius: 500px;
+}
+
+.home-nav > .ancors > button, .home-nav > .ancors > a > button {
+    margin: 0 5px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-decoration: none;
+    /* background: var(--semi-black); */
+}
+
+.home-nav > .balance {
+    margin: 15px 0;
+    margin-left: 15px;
+}

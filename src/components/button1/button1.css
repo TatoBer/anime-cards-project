@@ -1,0 +1,31 @@
+.button1 {
+    padding: 9px 25px;
+    color: var(--white);
+    /* font-weight: bold; */
+    font-size: 17px;
+    border-radius: 15000px;
+    letter-spacing: .3px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+    transition: filter .3s ease, opacity .3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.button1:hover {
+    filter: hue-rotate(-40deg);
+    opacity: .6;
+}
+
+.button1 svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    transform: scale(.85);
+    padding: 0;
+    width: 22px;
+    height: 22px;
+}

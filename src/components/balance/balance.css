@@ -1,0 +1,38 @@
+.balance {
+    padding: 0;
+    color: var(--semi-black);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row-reverse;
+    overflow: hidden;
+    border: 2px solid var(--primary-color);
+    user-select: none;
+    cursor: pointer;
+    transition: transform .2s ease;
+    max-height: 44px;
+}
+
+.balance:hover {
+    transform: scale(1.05);
+}
+
+.balance > svg {
+    height: 27px;
+    width: 27px;
+    margin: 0 10px;
+    transition: color .3s ease;
+}
+
+.balance:hover > svg {
+    color: rgb(57, 153, 37);
+}
+
+.balance > span {
+    height: 100%;
+    padding: 10px 40px;
+    border-radius: 150px;
+    background-color: var(--semi-black);
+    font-weight: bold;
+    font-size: 18px;
+}

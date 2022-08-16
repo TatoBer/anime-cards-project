@@ -1,0 +1,36 @@
+.bet-notification {
+  position: absolute;
+  top: 28px;
+  z-index: 950;
+  right: 105px;
+  font-weight: bold;
+  opacity: 0;
+  color: rgb(0, 207, 0);
+  pointer-events: none;
+  user-select: none;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.bet-notification.enter {
+  animation: bet-enter 0.7s ease-in-out;
+}
+
+.bet-notification.red {
+    color: red;
+}
+
+@keyframes bet-enter {
+  0% {
+    transform: none;
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(40px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+}

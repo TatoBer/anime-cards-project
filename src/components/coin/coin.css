@@ -1,0 +1,64 @@
+.coin {
+    width: 200px;
+    height: 200px;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 6px 6px 1px #00000025, -6px -6px 10px #ffffff0a;
+    outline: 1px solid rgba(0, 0, 0, 0.048);
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.coin.sun {
+    background: linear-gradient(220.55deg, #FFD439 0%, #d66112 100%);
+}
+
+.coin.moon {
+    background: linear-gradient(220.55deg, #5D85A6 0%, #0E2C5E 100%);
+}
+
+.coin:hover {
+    transform: scale(1.07);
+    box-shadow: 12px 12px 8px #00000025;
+}
+
+.coin.disabled {
+    pointer-events: none;
+    user-select: none;
+    filter: grayscale(.7);
+}
+
+.coin.disabled:hover {
+    transform: none;
+    box-shadow: 6px 6px 10px #00000025, -6px -6px 10px #ffffff0a;
+}
+
+.coin span {
+    border-radius: 50%;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coin > span {
+    width: 200px;
+    height: 200px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%23F0F8FFFF' stroke-width='25' stroke-dasharray='23%25%2c 8%25' stroke-dashoffset='88' stroke-linecap='butt'/%3e%3c/svg%3e");}
+
+.coin > span > span {
+    width: 145px;
+    height: 145px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%23F0F8FF66' stroke-width='10' stroke-dasharray='8%25%2c 4%25' stroke-dashoffset='88' stroke-linecap='butt'/%3e%3c/svg%3e");
+
+}
+
+.coin svg {
+    width: 65%;
+    height: 65%;
+    color: var(--white);
+    filter: drop-shadow( 4px 4px 5px rgba(0, 0, 0, 0.205));
+}

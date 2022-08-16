@@ -1,0 +1,79 @@
+.card {
+    overflow: hidden;
+    background: linear-gradient(220.55deg, rgb(190, 197, 204) 0%, var(--white) 100%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
+    border-radius: 10px 10px 30px 30px;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224952;
+    border: 3px solid var(--primary-color);
+    transition: all .3s ease;
+}
+
+.card.epic {
+    border: 3px solid var(--legendary);
+    box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224952, 0px 0px 18px 0px #dfd87e;
+}
+
+.card > * {
+    color: var(--semi-black);
+}
+
+.card.off {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.card > div {
+    overflow: hidden;
+    width: 290px;
+    height: 290px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.212), 0 3px 8px #00000070;
+    border-radius: 0 0 30px 30px;
+}
+
+.card > div > span {
+  position: absolute;
+  background-color: rgb(223, 232, 240);
+  color: var(--semi-black);
+  padding: 5px 9px 10px 15px;
+  border: none;
+  border-radius: 0 0 0 25px;
+  top: 0;
+  right: 0;
+  font-style: italic;
+  box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224928;
+}
+
+.card > div > img {
+    height: 100%;
+}
+
+.card > div > svg {
+  font-size: 85px;
+  color: var(--semi-black);
+  animation: rotation .5s cubic-bezier(0.34, 0.93, 0.72, 0.53) infinite;
+  opacity: .7;
+}
+
+.card > p {
+    margin-bottom: 15px;
+    opacity: .8;
+}
+
+.card > strong {
+    font-size: 19px;
+}
+
+
+  

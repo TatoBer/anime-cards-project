@@ -57,7 +57,7 @@ h1, h2, h3, h4, div, span, p, strong, time {
   --bg: linear-gradient(220.55deg, #4063BC 0%, #63076b 100%);
   --bg-animation: gradient 25s ease infinite;
   --primary-color: #9486e6;
-  --legendary: #dfd87e;
+  --legendary: #ecbf43;
 }
 
 .app {

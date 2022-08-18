@@ -38,13 +38,11 @@ export default function Casino() {
     } else if (user) {
       getUserInfo(user.uid).then((res) => {
         if (res.length === 0) {
-          console.log("no se encontro el user info");
           createUserInfo(user.uid);
           getUserInfo(user.uid).then(res=>{
             setUserInfo(res[0]);
            })
         } else {
-          console.log("se encontro el user info");
           setUserInfo(res[0]);
         }
       });

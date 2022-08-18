@@ -1,0 +1,129 @@
+.sobre {
+  height: 400px;
+  margin: 30px;
+  width: 300px;
+  /* background: linear-gradient(220.55deg, #f5d889 0%, #ca9613 100%); */
+  border-radius: 35% 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: inset 15px 15px 50px -20px white,
+    inset -15px -15px 60px -15px #00000091, 4px 4px 9px rgba(0, 0, 0, 0.137);
+  outline: 1px solid rgba(0, 0, 0, 0.089);
+  /* filter: hue-rotate(90deg); */
+  user-select: none;
+}
+
+.sobre > div {
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  background-color: #00000081;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  border-radius: 35% 2%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sobre > div > .info {
+    font-size: 30px;
+    position: absolute;
+    bottom: 13px;
+    left: 13px;
+    opacity: .5;
+    color: var(--white);
+    transition: opacity .2s ease;
+}
+
+.sobre > div > .info:hover {
+    opacity: .94;
+}
+
+.sobre > div > button {
+    border-radius: 20px 3px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 3px 0px #0000006b;
+    font-size: 25px;
+    font-style: italic;
+    transition: opacity .4s ease;
+    opacity: .8;
+}
+
+.sobre > div > button:hover {
+    opacity: 1;
+}
+
+.sobre > div > button:disabled {
+    filter: grayscale(1);
+    pointer-events: none;
+    opacity: .6;
+}
+
+.sobre:hover > div {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sobre > div > .loading{
+    font-size: 65px;
+    color: var(--white);
+    animation: rotation .5s cubic-bezier(0.34, 0.93, 0.72, 0.53) infinite;
+    opacity: .5;
+    position: relative;
+}
+
+.sobre:before {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  top: -180px;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.171);
+  animation: shiny-btn1 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.sobre * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.sobre > span {
+  background: linear-gradient(220.55deg, #56565627 0%, #18181827 100%);
+  height: 95%;
+  width: 95%;
+  border-radius: 35% 2%;
+  box-shadow: inset 0 0 28px -10px black;
+}
+
+.sobre > span > span {
+  width: 100%;
+  height: 100%;
+  border-radius: 35% 2%;
+  border: 5px solid rgba(0, 0, 0, 0.123);
+  overflow: hidden;
+}
+
+.sobre > span > span > svg {
+  color: var(--semi-black);
+  font-size: 800px;
+  transform: scale(1.5);
+  opacity: 0.2;
+}

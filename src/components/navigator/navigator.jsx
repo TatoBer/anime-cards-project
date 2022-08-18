@@ -18,12 +18,14 @@ export default function Navigator() {
     
     <LogOut />
     <nav className='nav-lateral'>
+      <div>
         <Link to="/">
         <FaHome />
         </Link>
         <FaInfoCircle />
         <CgCardHearts />
         <FaShoppingCart />
+      </div>
         <MdLogout onClick={handleLogOut} />
     </nav>
 

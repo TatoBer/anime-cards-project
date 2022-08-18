@@ -8,15 +8,16 @@
 
     /* border-radius: 0 8px 8px 0; */
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
 
     z-index: 150000;
     border-right: 2px solid var(--primary-color);
+    transition: transform .3s ease ;
 }
 
-.nav-lateral > a > svg, .nav-lateral > svg {
+.nav-lateral > a > svg, .nav-lateral > svg, .nav-lateral > div > a > svg, .nav-lateral > div > svg {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +31,16 @@
     transition: background-color .2s ease, transform .2s ease;
 }
 
-.nav-lateral > a > svg:hover, .nav-lateral > svg:hover {
+.nav-lateral > a > svg:hover, .nav-lateral > svg:hover, .nav-lateral > div > a > svg:hover, .nav-lateral > div > svg:hover {
     background-color: #18134136;
     transform: scale(1.05);
+}
+
+.nav-lateral > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-lateral > svg {
+    margin-bottom: 10px;
 }

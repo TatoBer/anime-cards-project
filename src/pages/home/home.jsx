@@ -39,13 +39,11 @@ export default function Home() {
       getAllPjs().then((result) => setAllPjs(result));
       getUserInfo(user.uid).then(res => {
         if (res.length === 0) {
-          console.log("no se encontro el user info");
           createUserInfo(user.uid);
           getUserInfo(user.uid).then(res=>{
            setUserInfo(res[0]);
           })
         } else {
-          console.log("se encontro el user info");
           setUserInfo(res[0]);
         }
       });
@@ -68,15 +66,6 @@ export default function Home() {
     }
   }, [allPjs]);
 
-  const lastGacha = () => {
-    const newInfo = {
-      configs: { last: "gacha", gacha: true },
-    };
-
-    updateUserInfo(user.uid, newInfo);
-    console.log("GACHA");
-  };
-
   const lastShop = () => {
     const newInfo = {
       configs: { last: "shop", shop: true },
@@ -97,17 +86,19 @@ export default function Home() {
       <div className="app">
         <nav className="home-nav">
           {userInfo && (
-            <Balance onClick={logUserInfo} balance={userInfo.balance} />
+            <Balance balance={userInfo.balance} onClick={logUserInfo} />
           )}
           <div className="ancors white-box">
             <Button1 className="shiny" onClick={lastShop}>
               SHOP
               <FaShoppingCart />
             </Button1>
-            <Button1 className="shiny" onClick={lastGacha}>
+            <Link to="/gacha">
+            <Button1 className="shiny">
               GACHA
               <BsMoonStarsFill />
             </Button1>
+            </Link>
             <Link to="/casino">
               <Button1 className="shiny">
                 CASINO

@@ -1,0 +1,132 @@
+.gacha-page-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.gacha-page-1 > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.gacha-page-1 > .balance {
+  margin: 15px;
+}
+
+.to-left {
+  transform: translateX(-100vw);
+}
+
+.nav-lateral.to-left {
+  transform: translateX(-80px);
+}
+
+.gacha-page-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(100vw);
+  transition: transform 0.3s ease;
+}
+
+.gacha-page-1.to-left + .gacha-page-2 {
+  transform: none;
+}
+
+.gacha-page-2 > section {
+  padding: 35px;
+  background: linear-gradient(transparent 0%, #27224963 100%);
+  border-radius: 15px;
+  outline: 1px solid rgba(0, 0, 0, 0.075);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.gacha-page-2 > section > span > .control {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 19px;
+  margin-left: 35px;
+}
+
+.gacha-page-2 > section > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.control + .control {
+    margin-top: 35px;
+}
+
+section > span > .control > svg {
+  font-size: 70px;
+  padding: 3px;
+  margin: 5px;
+  border-radius: 15px;
+  color: var(--white);
+  background: var(--bg);
+  animation: var(--bg-animation);
+  transition: box-shadow 0.2s ease, filter .2s ease;
+  cursor: pointer;
+}
+
+section > span > .control > svg.disabled {
+    filter: grayscale(.8);
+    pointer-events: none;
+}
+
+
+section > span > .control > svg:hover {
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+    -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+}
+
+section > span > .control > p {
+  background-color: var(--semi-black);
+  width: 100%;
+  text-align: center;
+  padding: 7px;
+  border-radius: 15px;
+  font-size: 17px;
+  user-select: none;
+}
+
+.gacha-page-2 > section > h4 {
+    font-size: 90px;
+    opacity: .5;
+    height: 370px;
+    width: 290px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--primary-color);
+    border-radius: 10px 10px 30px 30px;
+    transition: all .2s ease;
+}
+
+.gacha-page-2 > section > h4.off {
+    transform: scale(0);
+}
+
+.cardback {
+    pointer-events: none;
+    position: absolute;
+    transform: scale(0);
+}

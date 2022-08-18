@@ -8,6 +8,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import Login from './pages/login/login';
 import Home from './pages/home/home';
 import Casino from './pages/casino/casino';
+import Gacha from './pages/gacha/gacha';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
       <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/casino' element={<Casino />} />
+      <Route path='/gacha' element={<Gacha />} />
     </Routes>
    </BrowserRouter>
   </>

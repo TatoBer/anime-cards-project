@@ -130,10 +130,8 @@ export const createUserInfo = async (uid) => {
 
 export const updateUserInfo = async (uid, userInfo) => {
   await setDoc(doc(db, "user-info", uid), userInfo, { merge: true })
-    .then((x) => {
-      console.log("userInfo ha sido actualizado");
-    })
-    .catch((e) => {
-      console.log(e);
-    });
+};
+
+export const replaceUserInfo = async (uid, userInfo) => {
+  await setDoc(doc(db, "user-info", uid), userInfo)
 };

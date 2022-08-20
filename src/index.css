@@ -69,6 +69,7 @@ h1, h2, h3, h4, div, span, p, strong, time {
   flex-direction: column;
   position: relative;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .app::-webkit-scrollbar {

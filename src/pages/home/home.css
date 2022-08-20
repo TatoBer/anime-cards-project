@@ -1,0 +1,12 @@
+.home-app > .buttons-div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 20px 15px 0;
+    max-width: 800px;
+    flex-wrap: wrap;
+}
+
+.home-app > .buttons-div > button {
+    margin: 15px;
+}

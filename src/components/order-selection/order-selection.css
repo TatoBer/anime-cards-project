@@ -1,0 +1,36 @@
+.order-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    transition: height .2s ease, opacity .2s ease;
+    overflow: hidden;
+    border-radius: 23px;
+    background-color: var(--semi-black);
+    padding: 7px 0;
+    margin-top: 5px;
+    border: 2px solid var(--primary-color);
+    height: 240px;
+}
+
+.order-selection > button {
+    background-color: transparent;
+    width: 100%;
+    color: var(--white);
+    padding: 7px 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+.order-selection > button:hover {
+    background-color: #f0f8ff17
+}
+
+.order-selection.off {
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}

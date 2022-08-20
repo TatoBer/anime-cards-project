@@ -13,59 +13,114 @@ function randomElements(array, quantity) {
 }
 
 export const starsMultipler = (stars) => {
-  const multipler = 1 + (stars * 0.05);
+  const multipler = 1 + stars * 0.05;
   return multipler;
 };
 
 const addRewards = (information, packReward, setPackContains) => {
   let harem = information.pjs;
   let addi = [];
+  let count = 0
   packReward = packReward.map((r) => {
+    let date1 =  new Date()
+    date1 = Date.parse(date1)
+    date1 = date1 + count
     if (
       harem.filter((e) => e.id === r.id).length > 0 ||
       addi.filter((e) => e.id === r.id).length > 0
     ) {
       const repeated = harem.filter((e) => e.id === r.id)[0];
       harem = harem.filter((e) => e.id !== r.id);
+      if (repeated.legendary) {
+        if (r.legendary) {
+          addi = [
+            ...addi,
+            {
+              id: repeated.id,
+              stars: repeated.stars + 5,
+              legendary: repeated.legendary,
+              date: repeated.date,
+            },
+          ];
+          return {
+            ...r,
+            repeated: true,
+            stars: repeated.stars + 5,
+            value: Math.floor(r.value * 2 * starsMultipler(repeated.stars + 5)),
+          };
+        } else {
+          addi = [
+            ...addi,
+            {
+              id: repeated.id,
+              stars: repeated.stars + 1,
+              legendary: repeated.legendary,
+              date: repeated.date,
+            },
+          ];
+          return {
+            ...r,
+            repeated: true,
+            stars: repeated.stars + 1,
+            value: Math.floor(r.value * 2 * starsMultipler(repeated.stars + 1)),
+          };
+        }
+      } else {
+        if (r.legendary) {
+          addi = [
+            ...addi,
+            {
+              id: repeated.id,
+              stars: repeated.stars + 5,
+              legendary: repeated.legendary,
+              date: repeated.date,
+            },
+          ];
+          return {
+            ...r,
+            repeated: true,
+            stars: repeated.stars + 5,
+            value: Math.floor(r.value * starsMultipler(repeated.stars + 5)),
+          };
+        } else {
+          addi = [
+            ...addi,
+            {
+              id: repeated.id,
+              stars: repeated.stars + 1,
+              legendary: repeated.legendary,
+              date: repeated.date,
+            },
+          ];
+          return {
+            ...r,
+            repeated: true,
+            stars: repeated.stars + 1,
+            value: Math.floor(r.value * starsMultipler(repeated.stars + 1)),
+          };
+        }
+      }
+    } else {
       if (r.legendary) {
         addi = [
           ...addi,
-          {
-            id: repeated.id,
-            stars: repeated.stars + 5,
-            legendary: repeated.legendary,
-          },
+          { id: r.id, stars: 0, legendary: r.legendary, date: date1 },
         ];
+        count++
         return {
           ...r,
-          repeated: true,
-          stars: repeated.stars + 5,
-          value: Math.floor(r.value * starsMultipler(repeated.stars + 5)),
+          repeated: false,
+          stars: null,
+          value: Math.floor(r.value * 2),
         };
       } else {
         addi = [
           ...addi,
-          {
-            id: repeated.id,
-            stars: repeated.stars + 1,
-            legendary: repeated.legendary,
-          },
+          { id: r.id, stars: 0, legendary: r.legendary, date: date1 },
         ];
-        return {
-          ...r,
-          repeated: true,
-          stars: repeated.stars + 1,
-          value: Math.floor(r.value * starsMultipler(repeated.stars + 1)),
-        };
+        count++
+        return { ...r, repeated: false, stars: null };
       }
-    } else {
-        if (r.legendary) {
-            addi = [...addi, { id: r.id, stars: 0, legendary: r.legendary }];
-            return { ...r, repeated: false, stars: null, value: Math.floor(r.value*5)};
-        } else {
-            addi = [...addi, { id: r.id, stars: 0, legendary: r.legendary }];
-            return { ...r, repeated: false, stars: null, };
-        }
     }
   });
   setPackContains(packReward);
@@ -81,7 +136,11 @@ export const openThisPack = ({
   setPackContains,
   information,
   legendaryChance,
+  minValue
 }) => {
+  if (minValue) {
+    bundle = bundle.filter((e) => e.value >= minValue)
+  }
   let packReward = randomElements(bundle, quantity);
   const legendaryCard = (chance) => {
     const random = Math.random();

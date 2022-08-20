@@ -1,44 +1,35 @@
 .card {
-    overflow: hidden;
-    background: linear-gradient(220.55deg, rgb(190, 197, 204) 0%, var(--white) 100%);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 10px 10px 30px 30px;
-    padding: 0;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-    box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224952;
-    border: 3px solid var(--primary-color);
-    transition: all .2s ease;
-    height: 370px;
-    width: 290px;
+  overflow: hidden;
+  background: linear-gradient(
+    220.55deg,
+    rgb(190, 197, 204) 0%,
+    var(--white) 100%
+  );
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px 10px 30px 30px;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224952;
+  border: 3px solid var(--primary-color);
+  transition: all 0.2s ease;
+  height: 370px;
+  width: 290px;
 }
 
 .card.legendary {
-    border: 3px solid var(--legendary);
-    box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224952, 0px 0px 22px 4px var(--legendary);
-    outline: 1px solid var(--legendary);
-}
-
-.card.legendary::before{
-    position: absolute;
-    content: "";
-    display: inline-block;
-    top: -180px;
-    left: 0;
-    width: 30px;
-    height: 100%;
-    z-index: 50;
-    background-color: #ffffff4b;
-    animation: shiny-btn1 3s ease-in-out infinite;
-    pointer-events: none;
+  border: 3px solid var(--legendary);
+  box-shadow: 4px 5px 20px #27224981, inset 3px 3px 10px #27224952,
+    0px 0px 22px 4px var(--legendary);
+  outline: 1px solid var(--legendary);
 }
 
 .card > * {
-    color: var(--semi-black);
+  color: var(--semi-black);
 }
 
 .card.off {
@@ -47,16 +38,16 @@
 }
 
 .card > div {
-    overflow: hidden;
-    width: 290px;
-    height: 290px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 7px 0 rgba(0, 0, 0, 0.212), 0 3px 8px #00000070;
-    border-radius: 0 0 30px 30px;
-    position: relative;
+  overflow: hidden;
+  width: 290px;
+  height: 290px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 7px 0 rgba(0, 0, 0, 0.212), 0 3px 8px #00000070;
+  border-radius: 0 0 30px 30px;
+  position: relative;
 }
 
 .card > div > span {
@@ -73,110 +64,107 @@
 }
 
 .card > div > .stars {
-    position: absolute;
-    background-color: var(--semi-black);
-    color: var(--white);
-    padding: 8px 15px 8px 15px;
-    bottom: 0;
-    right: 0;
-    border-radius: 25px 0 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
+  position: absolute;
+  background-color: var(--semi-black);
+  color: var(--white);
+  padding: 8px 15px 8px 15px;
+  bottom: 0;
+  right: 0;
+  border-radius: 25px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .card.legendary > div > .stars {
-    position: absolute;
-    background-color: var(--legendary);
-    box-shadow: 0px 0px 11px 5px var(--legendary);
-    color: var(--semi-black);
-    padding: 8px 15px 8px 15px;
-    bottom: 0;
-    right: 0;
-    border-radius: 25px 0 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    animation: new-bounce 2s ease infinite;
+  position: absolute;
+  background-color: var(--legendary);
+  box-shadow: 0px 0px 11px 5px var(--legendary);
+  color: var(--semi-black);
+  padding: 8px 15px 8px 15px;
+  bottom: 0;
+  right: 0;
+  border-radius: 25px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  animation: new-bounce 2s ease infinite;
 }
 
 .card.legendary > div > .stars > svg {
-    color: var(--semi-black);
+  color: var(--semi-black);
 }
 
 .card > div > .new {
-    position: absolute;
-    background-color: var(--primary-color);
-    box-shadow: 0px 0px 15px -3px var(--semi-black);
-    color: var(--semi-black);
-    padding: 8px 18px 8px 15px;
-    bottom: 0;
-    right: 0;
-    border-radius: 25px 0 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
+  position: absolute;
+  background-color: var(--primary-color);
+  box-shadow: 0px 0px 15px -3px var(--semi-black);
+  color: var(--semi-black);
+  padding: 8px 18px 8px 15px;
+  bottom: 0;
+  right: 0;
+  border-radius: 25px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .card.legendary > div > .new {
-    position: absolute;
-    background-color: var(--legendary);
-    box-shadow: 0px 0px 11px 5px var(--legendary);
-    color: var(--semi-black);
-    padding: 8px 18px 8px 15px;
-    bottom: 0;
-    right: 0;
-    border-radius: 25px 0 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    animation: new-bounce 2s ease infinite;
+  position: absolute;
+  background-color: var(--legendary);
+  box-shadow: 0px 0px 11px 5px var(--legendary);
+  color: var(--semi-black);
+  padding: 8px 18px 8px 15px;
+  bottom: 0;
+  right: 0;
+  border-radius: 25px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  animation: new-bounce 2s ease infinite;
 }
 
 @keyframes new-bounce {
-    0% {
-      transform: scale(1.05);
-    }
-    50% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(1.05);
-    }
+  0% {
+    transform: scale(1.05);
   }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
 
 .card > div > .stars > svg {
-    font-size: 20px;
-    margin-left: 2px;
+  font-size: 20px;
+  margin-left: 2px;
 }
 
 .card > div > img {
-    height: 100%;
+  height: 100%;
 }
 
 .card > div > svg {
   font-size: 85px;
   color: var(--semi-black);
-  animation: rotation .5s cubic-bezier(0.34, 0.93, 0.72, 0.53) infinite;
-  opacity: .7;
+  animation: rotation 0.5s cubic-bezier(0.34, 0.93, 0.72, 0.53) infinite;
+  opacity: 0.7;
 }
 
 .card > p {
-    margin-bottom: 15px;
-    opacity: .8;
+  margin-bottom: 15px;
+  opacity: 0.8;
 }
 
 .card > strong {
-    font-size: 19px;
+  font-size: 19px;
 }
-
-
-  

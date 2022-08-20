@@ -1,0 +1,31 @@
+.button-3 {
+    width: 220px;
+    height: 220px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow .2s ease;
+}
+
+.button-3:hover{
+    box-shadow: 0px 0px 15px 4px var(--primary-color), inset 3px 3px 10px #27224952;
+}
+
+.button-3 > svg {
+    font-size: 95px;
+    color: var(--semi-black);
+    margin-top: 28px;
+    opacity: .9;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@1&display=swap');
+
+.button-3 > p {
+    color: var(--semi-black);
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+}

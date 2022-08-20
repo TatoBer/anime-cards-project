@@ -18,7 +18,6 @@ import {
   GiCrossedChains,
   GiBurningForest,
   GiBurningMeteor,
-  GiCompanionCube,
   GiEagleEmblem,
   GiFlamingSheet,
   GiFog,
@@ -111,7 +110,7 @@ export default function Gacha() {
           if (bundle.length > 0) {
             roll.classList.remove("disabled");
           }
-        }, 500);
+        }, 900);
       } else {
         card.classList.add("off");
         roll.classList.add("disabled");
@@ -126,31 +125,33 @@ export default function Gacha() {
           if (bundle.length > 0) {
             roll.classList.remove("disabled");
           }
-        }, 500);
+        }, 900);
       }
     }
   };
 
-  const goPack = (information, price, quantity, legendaryChance) => {
-    const newBalance = information.balance - price;
-    updateUserInfo(user.uid, { balance: newBalance });
-    setUserInfo({ ...information, balance: newBalance });
+  const goPack = (information, quantity, legendaryChance, minValue) => {
     const call = {
       quantity: quantity,
       bundle: allPjs,
       setPackContains,
       information,
       legendaryChance,
+      minValue
     };
     openThisPack(call);
   };
 
-  const handlePackSelection = (price, quantity, legendaryChance)=>{
-    getUserInfo(user.uid).then((x) => {
+  const handlePackSelection = (price, quantity, legendaryChance, minValue)=>{
+    getUserInfo(user.uid).then(async (x) => {
       const information = x[0];
       setUserInfo(information);
       if (information.balance >= price) {
-        goPack(information, price, quantity, legendaryChance)
+        const newBalance = information.balance - price;
+        await updateUserInfo(user.uid, { balance: newBalance });
+        information.balance = newBalance
+        setUserInfo({ ...information, balance: newBalance });
+        goPack(information, quantity, legendaryChance, minValue)
       }
     });
   }
@@ -166,6 +167,22 @@ export default function Gacha() {
   const openPackEagle = () => {
     setButon(false);
     handlePackSelection(55000, 25, 0.05)
+    setTimeout(() => {
+      setButon(true);
+    }, 2000);
+  };
+
+  const openPackForest = () => {
+    setButon(false);
+    handlePackSelection(100000, 5, 1)
+    setTimeout(() => {
+      setButon(true);
+    }, 2000);
+  };
+
+  const openPackGreen = () => {
+    setButon(false);
+    handlePackSelection(400000, 5, 1, 3000)
     setTimeout(() => {
       setButon(true);
     }, 2000);
@@ -204,8 +221,18 @@ export default function Gacha() {
                   price={100000}
                   buton={buton}
                   bg="linear-gradient(220.55deg, #FF5EEF 0%, #456EFF 100%)"
+                  click={openPackForest}
                 >
                   <GiBurningForest />
+                </Sobre>
+                <Sobre
+                  dis={userInfo.balance >= 400000}
+                  click={openPackGreen}
+                  price={400000}
+                  buton={buton}
+                  bg="linear-gradient(220.55deg, #dbff99 0%, #349134 100%)"
+                >
+                  <GiEagleEmblem />
                 </Sobre>
               </div>
             </>

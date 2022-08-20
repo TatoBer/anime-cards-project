@@ -2,7 +2,7 @@
   height: 400px;
   margin: 30px;
   width: 300px;
-  /* background: linear-gradient(220.55deg, #f5d889 0%, #ca9613 100%); */
+  background: linear-gradient(220.55deg, #dbff99 0%, #349134 100%);
   border-radius: 35% 2%;
   display: flex;
   justify-content: center;
@@ -10,8 +10,8 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: inset 15px 15px 50px -20px white,
-    inset -15px -15px 60px -15px #00000091, 4px 4px 9px rgba(0, 0, 0, 0.137);
+  box-shadow: inset 10px 22px 50px -20px white,
+    inset -15px -10px 60px -15px #00000091, 4px 4px 9px rgba(0, 0, 0, 0.137);
   outline: 1px solid rgba(0, 0, 0, 0.089);
   /* filter: hue-rotate(90deg); */
   user-select: none;
@@ -84,7 +84,7 @@
     position: relative;
 }
 
-.sobre:before {
+/* .sobre:before {
   position: absolute;
   content: "";
   display: inline-block;
@@ -96,7 +96,7 @@
   background-color: rgba(255, 255, 255, 0.171);
   animation: shiny-btn1 3s ease-in-out infinite;
   pointer-events: none;
-}
+} */
 
 .sobre * {
   display: flex;

@@ -1,7 +1,8 @@
 import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { BsMoonStarsFill } from "react-icons/bs";
-import { GiDiceFire } from "react-icons/gi";
+import { GiDiceFire, GiAchievement } from "react-icons/gi";
+import { MdOutlineQueryStats, MdCollectionsBookmark } from "react-icons/md";
 import "../../components/home-nav/home-nav.css";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
 import "./home.css";
@@ -19,11 +20,10 @@ import Navigator from "../../components/navigator/navigator";
 import Balance from "../../components/balance/balance";
 import Button1 from "../../components/button1/button1";
 import Card from "../../components/card/card";
+import Button3 from "../../components/button3/button3";
 
 export default function Home() {
   const [user, setUser] = useState(undefined);
-  const [allPjs, setAllPjs] = useState(undefined);
-  const [randomPj, setRandomPj] = useState({ name: "", serie: ".", img: "" });
   const [userInfo, setUserInfo] = useState(undefined);
 
   useEffect(() => {
@@ -36,7 +36,6 @@ export default function Home() {
     if (user === null) {
       navigate("/login");
     } else if (user) {
-      getAllPjs().then((result) => setAllPjs(result));
       getUserInfo(user.uid).then(res => {
         if (res.length === 0) {
           createUserInfo(user.uid);
@@ -58,14 +57,6 @@ export default function Home() {
     }
   }, [userInfo]);
 
-  useEffect(() => {
-    if (allPjs) {
-      const num = Math.round(Math.random() * allPjs.length) - 1;
-      const random = allPjs[num];
-      setRandomPj(random);
-    }
-  }, [allPjs]);
-
   const lastShop = () => {
     const newInfo = {
       configs: { last: "shop", shop: true },
@@ -79,11 +70,24 @@ export default function Home() {
     console.log(userInfo);
   };
 
+  const goToCollection = (e)=>{
+    e.preventDefault()
+    navigate("/collection")
+  }
+  const goToStats = (e)=>{
+    e.preventDefault()
+    navigate("/stats")
+  }
+  const goToAchievements = (e)=>{
+    e.preventDefault()
+    navigate("/achievements")
+  }
+
   return (
     <>
       <Navigator />
       {/* <NewPj /> */}
-      <div className="app">
+      <div className="app home-app">
         <nav className="home-nav">
           {userInfo && (
             <Balance balance={userInfo.balance} onClick={logUserInfo} />
@@ -107,6 +111,20 @@ export default function Home() {
             </Link>
           </div>
         </nav>
+        <div className="buttons-div">
+        <Button3 click={goToCollection}>
+          <MdCollectionsBookmark />
+          <p>COLLECTION</p>
+        </Button3>
+        <Button3 click={goToStats}>
+          <MdOutlineQueryStats />
+          <p>STATS</p>
+        </Button3>
+        <Button3 click={goToAchievements}>
+          <GiAchievement />
+          <p>ACHIEVEMENTS</p>
+        </Button3>
+        </div>
         <LoadingFullscreen />
       </div>
     </>

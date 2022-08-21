@@ -123,7 +123,7 @@ export const createUserInfo = async (uid) => {
     uid: uid,
     configs: {},
     pjs: [],
-    balance: 0,
+    balance: 10000,
     achievements: {casinoWins: 0},
   });
 };

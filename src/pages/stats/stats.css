@@ -1,0 +1,23 @@
+.stats-app > h1 {
+    letter-spacing: 1px;
+    opacity: .85;
+    font-style: italic;
+    margin: 20px 0;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.stats-app > .stat-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    padding: 25px 105px;
+    background: linear-gradient( to right , transparent 0%, #27224963 33%, #27224963 66%, transparent 100%  );
+    flex-wrap: wrap;
+}
+
+.stat-container > .stat {
+    margin: 15px;
+}

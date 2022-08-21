@@ -10,6 +10,7 @@ import Home from './pages/home/home';
 import Casino from './pages/casino/casino';
 import Gacha from './pages/gacha/gacha';
 import Collection from './pages/collection/collection';
+import Stats from './pages/stats/stats';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +22,7 @@ root.render(
       <Route path='/casino' element={<Casino />} />
       <Route path='/gacha' element={<Gacha />} />
       <Route path='/collection' element={<Collection />} />
+      <Route path='/stats' element={<Stats />} />
     </Routes>
    </BrowserRouter>
   </>

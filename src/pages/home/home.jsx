@@ -9,18 +9,14 @@ import "./home.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import {
-  createUserInfo,
-  getAllPjs,
-  getUserInfo,
   onAuthStateChanged,
-  updateUserInfo,
 } from "../../firebase/client";
 import { useNavigate, Link } from "react-router-dom";
 import Navigator from "../../components/navigator/navigator";
 import Balance from "../../components/balance/balance";
 import Button1 from "../../components/button1/button1";
-import Card from "../../components/card/card";
 import Button3 from "../../components/button3/button3";
+import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
 
 export default function Home() {
   const [user, setUser] = useState(undefined);
@@ -36,14 +32,15 @@ export default function Home() {
     if (user === null) {
       navigate("/login");
     } else if (user) {
-      getUserInfo(user.uid).then(res => {
-        if (res.length === 0) {
-          createUserInfo(user.uid);
-          getUserInfo(user.uid).then(res=>{
-           setUserInfo(res[0]);
+      getUserInfo2(user.uid).then(res => {
+        if (!res) {
+          createUserInfo2(user.uid).then(()=>{
+            getUserInfo2(user.uid).then(res=>{
+              setUserInfo(res);
+             })
           })
         } else {
-          setUserInfo(res[0]);
+          setUserInfo(res);
         }
       });
     }
@@ -57,17 +54,10 @@ export default function Home() {
     }
   }, [userInfo]);
 
-  const lastShop = () => {
-    const newInfo = {
-      configs: { last: "shop", shop: true },
-    };
-
-    updateUserInfo(user.uid, newInfo);
-    console.log("SHOP");
-  };
-
-  const logUserInfo = () => {
-    console.log(userInfo);
+  const addBalance = () => {
+    updateUserInfo2(user.uid, {balance: userInfo.balance+1000}).then(()=>{
+      getUserInfo2(user.uid).then(res=>setUserInfo(res))
+    })
   };
 
   const goToCollection = (e)=>{
@@ -90,13 +80,9 @@ export default function Home() {
       <div className="app home-app">
         <nav className="home-nav">
           {userInfo && (
-            <Balance balance={userInfo.balance} onClick={logUserInfo} />
+            <Balance balance={userInfo.balance} onClick={addBalance} />
           )}
           <div className="ancors white-box">
-            <Button1 className="shiny" onClick={lastShop}>
-              SHOP
-              <FaShoppingCart />
-            </Button1>
             <Link to="/gacha">
             <Button1 className="shiny">
               GACHA

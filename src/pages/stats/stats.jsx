@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navigator from "../../components/navigator/navigator";
 import {
-  createUserInfo,
   getUserInfo,
   onAuthStateChanged,
 } from "../../firebase/client";
@@ -11,6 +10,7 @@ import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscr
 import Stat from "../../components/stat/stat";
 import { FaUsers, FaMoneyBillWave } from "react-icons/fa";
 import { BsStarFill, BsStars } from "react-icons/bs";
+import { createUserInfo2, getUserInfo2 } from "../../api-requests/requests";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -30,14 +30,15 @@ export default function Stats() {
     if (user === null) {
       navigate("/login");
     } else if (user) {
-      getUserInfo(user.uid).then((res) => {
-        if (res.length === 0) {
-          createUserInfo(user.uid);
-          getUserInfo(user.uid).then((res) => {
-            setUserInfo(res[0]);
+      getUserInfo2(user.uid).then((res) => {
+        if (!res) {
+          createUserInfo2(user.uid).then(()=>{
+            getUserInfo2(user.uid).then((res) => {
+              setUserInfo(res);
+            });
           });
         } else {
-          setUserInfo(res[0]);
+          setUserInfo(res);
         }
       });
     }

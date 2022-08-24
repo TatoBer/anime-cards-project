@@ -1,4 +1,4 @@
-import { replaceUserInfo, updateUserInfo } from "../../firebase/client";
+import { updateUserInfo2 } from "../../api-requests/requests";
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -20,11 +20,12 @@ export const starsMultipler = (stars) => {
 const addRewards = (information, packReward, setPackContains) => {
   let harem = information.pjs;
   let addi = [];
-  let count = 0
+  let count = 0;
+  let earns = 0;
   packReward = packReward.map((r) => {
-    let date1 =  new Date()
-    date1 = Date.parse(date1)
-    date1 = date1 + count
+    let date1 = new Date();
+    date1 = Date.parse(date1);
+    date1 = date1 + count;
     if (
       harem.filter((e) => e.id === r.id).length > 0 ||
       addi.filter((e) => e.id === r.id).length > 0
@@ -38,7 +39,7 @@ const addRewards = (information, packReward, setPackContains) => {
             {
               id: repeated.id,
               stars: repeated.stars + 5,
-              legendary: repeated.legendary,
+              legendary: true,
               date: repeated.date,
             },
           ];
@@ -54,7 +55,7 @@ const addRewards = (information, packReward, setPackContains) => {
             {
               id: repeated.id,
               stars: repeated.stars + 1,
-              legendary: repeated.legendary,
+              legendary: true,
               date: repeated.date,
             },
           ];
@@ -72,7 +73,7 @@ const addRewards = (information, packReward, setPackContains) => {
             {
               id: repeated.id,
               stars: repeated.stars + 5,
-              legendary: repeated.legendary,
+              legendary: true,
               date: repeated.date,
             },
           ];
@@ -80,7 +81,8 @@ const addRewards = (information, packReward, setPackContains) => {
             ...r,
             repeated: true,
             stars: repeated.stars + 5,
-            value: Math.floor(r.value * starsMultipler(repeated.stars + 5)),
+            value: Math.floor(r.value * 2 * starsMultipler(repeated.stars + 5)),
+            update: true,
           };
         } else {
           addi = [
@@ -88,7 +90,7 @@ const addRewards = (information, packReward, setPackContains) => {
             {
               id: repeated.id,
               stars: repeated.stars + 1,
-              legendary: repeated.legendary,
+              legendary: false,
               date: repeated.date,
             },
           ];
@@ -106,7 +108,7 @@ const addRewards = (information, packReward, setPackContains) => {
           ...addi,
           { id: r.id, stars: 0, legendary: r.legendary, date: date1 },
         ];
-        count++
+        count++;
         return {
           ...r,
           repeated: false,
@@ -118,16 +120,15 @@ const addRewards = (information, packReward, setPackContains) => {
           ...addi,
           { id: r.id, stars: 0, legendary: r.legendary, date: date1 },
         ];
-        count++
+        count++;
         return { ...r, repeated: false, stars: null };
       }
     }
   });
   setPackContains(packReward);
   const newPjs = harem.concat(addi);
-  console.log(information);
-  console.log(newPjs);
-  replaceUserInfo(information.uid, { ...information, pjs: newPjs });
+
+  updateUserInfo2(information.uid, { ...information, pjs: newPjs });
 };
 
 export const openThisPack = ({
@@ -136,10 +137,10 @@ export const openThisPack = ({
   setPackContains,
   information,
   legendaryChance,
-  minValue
+  minValue,
 }) => {
   if (minValue) {
-    bundle = bundle.filter((e) => e.value >= minValue)
+    bundle = bundle.filter((e) => e.value >= minValue);
   }
   let packReward = randomElements(bundle, quantity);
   const legendaryCard = (chance) => {

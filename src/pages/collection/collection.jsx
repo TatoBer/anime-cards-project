@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
 import Navigator from "../../components/navigator/navigator";
 import {
-  createUserInfo,
   getAllPjs,
-  getUserInfo,
   onAuthStateChanged,
 } from "../../firebase/client";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +12,7 @@ import { displayPjs } from "./functions";
 import Card from "../../components/card/card";
 import PageSwitch from "../../components/page-switch/page-switch";
 import OrderSelection from "../../components/order-selection/order-selection";
+import { createUserInfo2, getUserInfo2 } from "../../api-requests/requests";
 
 export default function Collection() {
   const [user, setUser] = useState(undefined);
@@ -33,18 +32,19 @@ export default function Collection() {
     if (user === null) {
       navigate("/login");
     } else if (user) {
-      getUserInfo(user.uid).then((res) => {
-        if (res.length === 0) {
-          createUserInfo(user.uid);
-          getUserInfo(user.uid).then((res) => {
-            setUserInfo(res[0]);
-            getAllPjs().then((allP) => {
-              setAllPjs(allP)
-              setOrder("VALUE DESC.")
+      getUserInfo2(user.uid).then((res) => {
+        if (!res) {
+          createUserInfo2(user.uid).then(()=>{
+            getUserInfo2(user.uid).then((res) => {
+              setUserInfo(res);
+              getAllPjs().then((allP) => {
+                setAllPjs(allP)
+                setOrder("VALUE DESC.")
+              });
             });
-          });
+          }); 
         } else {
-          setUserInfo(res[0]);
+          setUserInfo(res);
           getAllPjs().then((allP) => {
             setAllPjs(allP)
             setOrder("VALUE DESC.")
@@ -68,7 +68,7 @@ export default function Collection() {
         document.querySelector(".loading-fullscreen").classList.add("off");
       }, 200);
     }
-  }, [userInfo]);
+  }, [bundleArray]);
 
   const chargeCards = (allPjs, userPjs, order) => {
     const call = {

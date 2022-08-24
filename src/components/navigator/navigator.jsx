@@ -23,7 +23,6 @@ export default function Navigator() {
         <FaHome />
         </Link>
         <FaInfoCircle />
-        <FaShoppingCart />
       </div>
         <MdLogout onClick={handleLogOut} />
     </nav>

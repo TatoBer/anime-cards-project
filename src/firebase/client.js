@@ -72,18 +72,20 @@ export const onAuthStateChanged = (onChange) => {
   });
 };
 
-export const loginWithGitHub = () => {
+export const loginWithGitHub = async () => {
   const githubProvider = new GithubAuthProvider();
   githubProvider.setCustomParameters(firebaseConfig);
   const auth = getAuth();
-  return signInWithPopup(auth, githubProvider).then(mapUserFromFirebaseAuth);
+  const userIn = await signInWithPopup(auth, githubProvider);
+  return mapUserFromFirebaseAuth(userIn);
 };
 
-export const loginWithGoogle = () => {
+export const loginWithGoogle = async () => {
   const googleProvider = new GoogleAuthProvider();
   googleProvider.setCustomParameters(firebaseConfig);
   const auth = getAuth();
-  return signInWithPopup(auth, googleProvider).then(mapUserFromFirebaseAuth);
+  const userIn = await signInWithPopup(auth, googleProvider);
+  return mapUserFromFirebaseAuth(userIn);
 };
 
 export const addNewPj = ({ name, serie, img, value }) => {
@@ -105,33 +107,4 @@ export const getAllPjs = async () => {
 
 export const logOut = () => {
   firebase.auth().signOut();
-};
-
-export const getUserInfo = async (uid) => {
-  const q = query(
-    collection(db, "user-info"),
-    where(firebase.firestore.FieldPath.documentId(), "==", uid)
-  );
-  const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((doc) => {
-    return { id: doc.id, ...doc.data() };
-  });
-};
-
-export const createUserInfo = async (uid) => {
-  await setDoc(doc(db, "user-info", uid), {
-    uid: uid,
-    configs: {},
-    pjs: [],
-    balance: 10000,
-    achievements: {casinoWins: 0},
-  });
-};
-
-export const updateUserInfo = async (uid, userInfo) => {
-  await setDoc(doc(db, "user-info", uid), userInfo, { merge: true })
-};
-
-export const replaceUserInfo = async (uid, userInfo) => {
-  await setDoc(doc(db, "user-info", uid), userInfo)
 };

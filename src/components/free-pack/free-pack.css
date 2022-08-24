@@ -1,0 +1,16 @@
+.free-pack {
+    background-color: #251e3da2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 23px 0;
+    width: 100%;
+    box-shadow: 0 0 25px -3px var(--semi-black);
+    margin: 20px 0;
+}
+
+.free-pack > .sobre {
+    width: 250px;
+    height: 320px;
+    margin: 0;
+}

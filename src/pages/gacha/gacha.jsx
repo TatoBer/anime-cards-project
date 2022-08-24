@@ -5,28 +5,28 @@ import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscr
 import Navigator from "../../components/navigator/navigator";
 import Sobre from "../../components/sobre/sobre";
 import {
-  createUserInfo,
   getAllPjs,
-  getUserInfo,
   onAuthStateChanged,
-  updateUserInfo,
 } from "../../firebase/client";
 import "./gacha.css";
 import {
-  GiFrozenArrow,
   GiBeastEye,
   GiCrossedChains,
   GiBurningForest,
-  GiBurningMeteor,
   GiEagleEmblem,
-  GiFlamingSheet,
-  GiFog,
 } from "react-icons/gi";
 import { RiRecycleFill } from "react-icons/ri";
-import { MdSkipNext } from "react-icons/md";
 import { BiArrowBack } from "react-icons/bi";
 import Balance from "../../components/balance/balance";
 import { openThisPack } from "./functions";
+import FreePack from "../../components/free-pack/free-pack";
+import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+
+const timestampNow = () => {
+  let date1 = new Date();
+  date1 = Date.parse(date1) / 1000;
+  return date1;
+};
 
 export default function Gacha() {
   const [user, setUser] = useState(undefined);
@@ -53,14 +53,15 @@ export default function Gacha() {
     if (user === null) {
       navigate("/login");
     } else if (user) {
-      getUserInfo(user.uid).then((res) => {
-        if (res.length === 0) {
-          createUserInfo(user.uid);
-          getUserInfo(user.uid).then((res) => {
-            setUserInfo(res[0]);
+      getUserInfo2(user.uid).then((res) => {
+        if (!res) {
+          createUserInfo2(user.uid).then(() => {
+            getUserInfo2(user.uid).then((res) => {
+              setUserInfo(res);
+            });
           });
         } else {
-          setUserInfo(res[0]);
+          setUserInfo(res);
         }
       });
     }
@@ -86,7 +87,6 @@ export default function Gacha() {
       setPackWin(null);
     }, 300);
   };
-
 
   const nextWin = () => {
     if (packContains.length > 0) {
@@ -137,28 +137,28 @@ export default function Gacha() {
       setPackContains,
       information,
       legendaryChance,
-      minValue
+      minValue,
     };
     openThisPack(call);
   };
 
-  const handlePackSelection = (price, quantity, legendaryChance, minValue)=>{
-    getUserInfo(user.uid).then(async (x) => {
-      const information = x[0];
+  const handlePackSelection = (price, quantity, legendaryChance, minValue) => {
+    getUserInfo2(user.uid).then(async (x) => {
+      const information = x;
       setUserInfo(information);
       if (information.balance >= price) {
         const newBalance = information.balance - price;
-        await updateUserInfo(user.uid, { balance: newBalance });
-        information.balance = newBalance
+        await updateUserInfo2(user.uid, { balance: newBalance });
+        information.balance = newBalance;
         setUserInfo({ ...information, balance: newBalance });
-        goPack(information, quantity, legendaryChance, minValue)
+        goPack(information, quantity, legendaryChance, minValue);
       }
     });
-  }
+  };
 
   const openPackGold = () => {
     setButon(false);
-    handlePackSelection(10000, 5, 0.03)
+    handlePackSelection(10000, 5, 0.1);
     setTimeout(() => {
       setButon(true);
     }, 2000);
@@ -166,7 +166,7 @@ export default function Gacha() {
 
   const openPackEagle = () => {
     setButon(false);
-    handlePackSelection(55000, 25, 0.05)
+    handlePackSelection(55000, 32, 0.05);
     setTimeout(() => {
       setButon(true);
     }, 2000);
@@ -174,7 +174,7 @@ export default function Gacha() {
 
   const openPackForest = () => {
     setButon(false);
-    handlePackSelection(100000, 5, 1)
+    handlePackSelection(100000, 5, 1);
     setTimeout(() => {
       setButon(true);
     }, 2000);
@@ -182,7 +182,26 @@ export default function Gacha() {
 
   const openPackGreen = () => {
     setButon(false);
-    handlePackSelection(400000, 5, 1, 3000)
+    handlePackSelection(400000, 5, 1, 3000);
+    setTimeout(() => {
+      setButon(true);
+    }, 2000);
+  };
+
+  const openPackFree = async () => {
+    setButon(false);
+    const newUserInfo = {
+      ...userInfo,
+      achievements: {
+        ...userInfo.achievements,
+        freeChest: {
+          count: userInfo.achievements.freeChest.count + 1,
+          lastPick: timestampNow(),
+        },
+      },
+    };
+    await updateUserInfo2(user.uid, { achievements: newUserInfo.achievements });
+    handlePackSelection(0, 3, 0.03, 0);
     setTimeout(() => {
       setButon(true);
     }, 2000);
@@ -197,6 +216,11 @@ export default function Gacha() {
           {userInfo && (
             <>
               <Balance balance={userInfo.balance} />
+              <FreePack
+                userInfo={userInfo}
+                buton={buton}
+                click={openPackFree}
+              />
               <div>
                 <Sobre
                   dis={userInfo.balance >= 10000}
@@ -251,6 +275,7 @@ export default function Gacha() {
                   className={`cardwin off`}
                   repeated={packWin.repeated}
                   stars={packWin.stars}
+                  update={packWin.update}
                 />
               </>
             ) : (

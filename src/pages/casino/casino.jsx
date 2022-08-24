@@ -2,12 +2,7 @@ import React from "react";
 import "../../components/home-nav/home-nav.css";
 import { useState, useEffect } from "react";
 import {
-  createUserInfo,
-  getAllPjs,
-  getUserInfo,
   onAuthStateChanged,
-  updateUserConfigs,
-  updateUserInfo,
 } from "../../firebase/client";
 import { useNavigate, Link } from "react-router-dom";
 import Navigator from "../../components/navigator/navigator";
@@ -18,6 +13,7 @@ import Coin from "../../components/coin/coin";
 import { GiBurningSkull, GiBleedingHeart } from "react-icons/gi";
 import YourBet from "../../components/your-bet/your-bet";
 import BetNotification from "../../components/bet-notification/bet-notification";
+import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
 
 export default function Casino() {
   const [user, setUser] = useState(undefined);
@@ -36,14 +32,15 @@ export default function Casino() {
     if (user === null) {
       navigate("/login");
     } else if (user) {
-      getUserInfo(user.uid).then((res) => {
-        if (res.length === 0) {
-          createUserInfo(user.uid);
-          getUserInfo(user.uid).then(res=>{
-            setUserInfo(res[0]);
-           })
+      getUserInfo2(user.uid).then((res) => {
+        if (!res) {
+          createUserInfo2(user.uid).then(()=>{
+            getUserInfo2(user.uid).then(res=>{
+              setUserInfo(res);
+             })
+          });      
         } else {
-          setUserInfo(res[0]);
+          setUserInfo(res);
         }
       });
     }
@@ -100,9 +97,9 @@ export default function Casino() {
   const handleCoinWin = async (bet, info) => {
       const newBalance = info.balance + bet;
       const totalWinned = info.achievements.casinoWins + bet
-      await updateUserInfo(user.uid, { balance: newBalance, achievements: {casinoWins: totalWinned} });
-      await getUserInfo(user.uid).then((res) => {
-        setUserInfo(res[0]);
+      await updateUserInfo2(user.uid, { balance: newBalance, achievements: {...info.achievements, casinoWins: totalWinned} });
+      await getUserInfo2(user.uid).then((res) => {
+        setUserInfo(res);
       });
       const betNotification = document.querySelector(".bet-notification");
       setBet(bet);
@@ -119,9 +116,9 @@ export default function Casino() {
 
   const handleCoinLose = async (bet, info) => {
       const newBalance = info.balance - bet;
-      await updateUserInfo(user.uid, { balance: newBalance });
-      await getUserInfo(user.uid).then((res) => {
-        setUserInfo(res[0]);
+      await updateUserInfo2(user.uid, { balance: newBalance });
+      await getUserInfo2(user.uid).then((res) => {
+        setUserInfo(res);
       });
       const betNotification = document.querySelector(".bet-notification");
       setBet(bet);
@@ -148,10 +145,10 @@ export default function Casino() {
   const betMoon = async () => {
     disableBets();
     const bet = flipBet;
-    await getUserInfo(user.uid).then((res) => {
-      setUserInfo(res[0]);
-      if (res[0].balance >= bet) {
-        goBet(bet, "moon", res[0]);
+    await getUserInfo2(user.uid).then((res) => {
+      setUserInfo(res);
+      if (res.balance >= bet) {
+        goBet(bet, "moon", res);
       } else {
         setTimeout(() => {
           enableBets();
@@ -164,10 +161,10 @@ export default function Casino() {
   const betSun = async () => {
     disableBets();
     const bet = flipBet;
-    await getUserInfo(user.uid).then((res) => {
-      setUserInfo(res[0]);
-      if (res[0].balance >= bet) {
-        goBet(bet, "sun", res[0]);
+    await getUserInfo2(user.uid).then((res) => {
+      setUserInfo(res);
+      if (res.balance >= bet) {
+        goBet(bet, "sun", res);
       } else {
         setTimeout(() => {
           enableBets();

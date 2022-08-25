@@ -33,9 +33,10 @@ export const createUserInfo2 = async (uid) => {
 
 export const updateUserInfo2 = async (uid, info) => {
   const response = await axios
-    .put("https://anime-cards-app.herokuapp.com/api/users/", {...info, uid})
+    .put("https://anime-cards-app.herokuapp.com/api/users/", { ...info, uid })
     .then((res) => {
       return res;
     })
     .catch((err) => console.log(err));
+  return response;
 };

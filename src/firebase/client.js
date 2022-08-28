@@ -88,22 +88,6 @@ export const loginWithGoogle = async () => {
   return mapUserFromFirebaseAuth(userIn);
 };
 
-export const addNewPj = ({ name, serie, img, value }) => {
-  addDoc(collection(db, "pjs-list"), {
-    name: name,
-    serie: serie,
-    img: img,
-    value: Number(value),
-  });
-};
-
-export const getAllPjs = async () => {
-  const q = query(collection(db, "pjs-list"), orderBy("value", "desc"));
-  const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((doc) => {
-    return { id: doc.id, ...doc.data() };
-  });
-};
 
 export const logOut = () => {
   firebase.auth().signOut();

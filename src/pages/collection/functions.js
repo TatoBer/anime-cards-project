@@ -2,7 +2,7 @@ import { starsMultipler } from "../gacha/functions";
 
 export const displayPjs = ({ allPjs, userPjs, order }) => {
   const pjs = userPjs.map((userPj) => {
-    const pjInfo = allPjs.filter((e) => e.id === userPj.id)[0];
+    const pjInfo = allPjs.filter((e) => e._id === userPj.id)[0];
     if (userPj.legendary) {
       return {
         ...pjInfo,

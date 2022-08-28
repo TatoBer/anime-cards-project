@@ -23,6 +23,7 @@ const addRewards = (information, packReward, setPackContains) => {
   let count = 0;
   let earns = 0;
   packReward = packReward.map((r) => {
+    r.id = r._id
     let date1 = new Date();
     date1 = Date.parse(date1);
     date1 = date1 + count;

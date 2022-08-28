@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
 import Navigator from "../../components/navigator/navigator";
-import {
-  getAllPjs,
-  onAuthStateChanged,
-} from "../../firebase/client";
+import { onAuthStateChanged } from "../../firebase/client";
 import { useNavigate } from "react-router-dom";
 import Balance from "../../components/balance/balance";
 import "./collection.css";
@@ -12,7 +9,11 @@ import { displayPjs } from "./functions";
 import Card from "../../components/card/card";
 import PageSwitch from "../../components/page-switch/page-switch";
 import OrderSelection from "../../components/order-selection/order-selection";
-import { createUserInfo2, getUserInfo2 } from "../../api-requests/requests";
+import {
+  createUserInfo2,
+  getAllPjs2,
+  getUserInfo2,
+} from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
 
 export default function Collection() {
@@ -35,33 +36,31 @@ export default function Collection() {
     } else if (user) {
       getUserInfo2(user.uid).then((res) => {
         if (!res) {
-          createUserInfo2(user.uid).then(()=>{
+          createUserInfo2(user.uid).then(() => {
             getUserInfo2(user.uid).then((res) => {
               setUserInfo(res);
-              getAllPjs().then((allP) => {
-                setAllPjs(allP)
-                setOrder("VALUE DESC.")
+              getAllPjs2().then((allP) => {
+                setAllPjs(allP);
+                setOrder("VALUE DESC.");
               });
             });
-          }); 
+          });
         } else {
           setUserInfo(res);
-          getAllPjs().then((allP) => {
-            setAllPjs(allP)
-            setOrder("VALUE DESC.")
+          getAllPjs2().then((allP) => {
+            setAllPjs(allP);
+            setOrder("VALUE DESC.");
           });
-
         }
       });
     }
   }, [user]);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     if (order) {
       setBundleArray(chargeCards(allPjs, userInfo.pjs, order));
     }
-  }, [order])
+  }, [order]);
 
   useEffect(() => {
     if (userInfo) {
@@ -91,7 +90,7 @@ export default function Collection() {
       <LoadingFullscreen />
       <div className="app collection-app" onClick={navOff}>
         {userInfo && <Balance balance={userInfo.balance} />}
-        
+
         {bundleArray.length > 0 && (
           <PageSwitch
             page={page}

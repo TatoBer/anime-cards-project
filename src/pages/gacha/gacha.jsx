@@ -20,7 +20,7 @@ import { BiArrowBack } from "react-icons/bi";
 import Balance from "../../components/balance/balance";
 import { openThisPack } from "./functions";
 import FreePack from "../../components/free-pack/free-pack";
-import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+import { createUserInfo2, getAllPjs2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
 
 const timestampNow = () => {
@@ -73,7 +73,7 @@ export default function Gacha() {
       setTimeout(() => {
         document.querySelector(".loading-fullscreen").classList.add("off");
       }, 200);
-      getAllPjs().then((res) => setAllPjs(res));
+      getAllPjs2().then((res) => setAllPjs(res));
     }
   }, [userInfo]);
 

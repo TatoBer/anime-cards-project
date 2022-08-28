@@ -40,3 +40,24 @@ export const updateUserInfo2 = async (uid, info) => {
     .catch((err) => console.log(err));
   return response;
 };
+
+export const getAllPjs2 = async () => {
+  const response = await axios
+    .get("https://anime-cards-app.herokuapp.com/api/characters/")
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log("ERROR", err));
+
+  return response;
+};
+
+export const createPj2 = async (pj) => {
+  const response = await axios
+    .post("https://anime-cards-app.herokuapp.com/api/characters/", pj)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log("ERROR", err));
+  return response;
+};

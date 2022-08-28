@@ -9,6 +9,7 @@ import "./home.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import {
+  getAllPjs,
   onAuthStateChanged,
 } from "../../firebase/client";
 import { useNavigate, Link } from "react-router-dom";
@@ -16,7 +17,7 @@ import Navigator from "../../components/navigator/navigator";
 import Balance from "../../components/balance/balance";
 import Button1 from "../../components/button1/button1";
 import Button3 from "../../components/button3/button3";
-import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+import { createPj2, createUserInfo2, getAllPjs2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
 
 export default function Home() {
@@ -74,6 +75,7 @@ export default function Home() {
     navigate("/achievements")
   }
 
+
   return (
     <>
       <Navigator />
@@ -81,7 +83,7 @@ export default function Home() {
       <div className="app home-app" onClick={navOff}>
         <nav className="home-nav">
           {userInfo && (
-            <Balance balance={userInfo.balance} onClick={addBalance} />
+            <Balance balance={userInfo.balance} />
           )}
           <div className="ancors white-box">
             <Link to="/gacha">

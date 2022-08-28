@@ -2,7 +2,7 @@ import React from "react";
 import "./card.css"
 import { AiOutlineLoading, AiFillStar } from "react-icons/ai";
 
-export default function Card({name, img, serie, value, className, legendary, repeated, stars, update}) {
+export default function Card({name, img, serie, value, className, legendary, repeated, stars, update, earn}) {
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -18,6 +18,7 @@ export default function Card({name, img, serie, value, className, legendary, rep
         />
         <span className="white-box">$ {numberWithCommas(Number(value))}</span>
         { !repeated ? <div className="new">NEW!</div> : <div className="stars">{stars}<AiFillStar/></div> }
+        { earn && (earn !== 0 && <div className="earns">+ ${numberWithCommas(Number(earn))}</div>) }
         { update && <div className="update">UPGRADED!</div> }
       </div>
       <strong>{name}</strong>

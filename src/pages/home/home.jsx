@@ -19,6 +19,7 @@ import Button1 from "../../components/button1/button1";
 import Button3 from "../../components/button3/button3";
 import { createPj2, createUserInfo2, getAllPjs2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
+import MainTittle from "../../components/main-tittle/main-tittle";
 
 export default function Home() {
   const [user, setUser] = useState(undefined);
@@ -100,6 +101,7 @@ export default function Home() {
             </Link>
           </div>
         </nav>
+        <MainTittle />
         <div className="buttons-div">
         <Button3 click={goToCollection}>
           <MdCollectionsBookmark />

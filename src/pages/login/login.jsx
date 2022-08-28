@@ -6,6 +6,7 @@ import {loginWithGitHub, loginWithGoogle, onAuthStateChanged} from '../../fireba
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
+import MainTittle from "../../components/main-tittle/main-tittle";
 
 export default function Login() {
 
@@ -29,8 +30,9 @@ export default function Login() {
 
   return (
     <div className="app">
+      <MainTittle />
       <span className="login-span">
-        <h2>Wellcome to InfinityCards</h2>
+        <h2>Welcome! Log in and start collecting anime cards</h2>
         <p>login para comenzar a coleccionar</p>
       </span>
       <div className="login-div white-box">

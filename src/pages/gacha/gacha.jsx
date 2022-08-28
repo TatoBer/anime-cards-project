@@ -139,6 +139,7 @@ export default function Gacha() {
       information,
       legendaryChance,
       minValue,
+      setUserInfo
     };
     openThisPack(call);
   };
@@ -277,6 +278,7 @@ export default function Gacha() {
                   repeated={packWin.repeated}
                   stars={packWin.stars}
                   update={packWin.update}
+                  earn={packWin.earn}
                 />
               </>
             ) : (

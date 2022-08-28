@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+.main-title {
+    margin: 35px 25px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.main-title * {
+    cursor: default;
+    margin: 0;
+}
+
+.main-title > p {
+    position: absolute;
+    top: -18px;
+    left: 20px;
+    font-style: italic;
+    color: var(--primary-color);
+}
+
+.main-title > h1{
+    font-family: var(--primary-font);
+    font-size: 55px;
+    letter-spacing: 2px;
+    font-style: oblique;
+    text-align: center;
+    line-height: 41px;
+}
+
+.main-title > h1 > strong {
+    color: var(--primary-color);
+}
+
+.main-title > h3 {
+    font-style: italic;
+    color: var(--white);
+    opacity: .8;
+    font-weight: 100;
+}
+
+.main-title > h3 > a {
+    color: var(--white);
+    text-decoration: underline;
+    cursor: pointer;
+}

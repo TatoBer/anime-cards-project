@@ -17,7 +17,7 @@ export const starsMultipler = (stars) => {
   return multipler;
 };
 
-const addRewards = (information, packReward, setPackContains) => {
+const addRewards = (information, packReward, setPackContains, setUserInfo) => {
   let harem = information.pjs;
   let addi = [];
   let count = 0;
@@ -44,11 +44,13 @@ const addRewards = (information, packReward, setPackContains) => {
               date: repeated.date,
             },
           ];
+          earns = earns + r.value
           return {
             ...r,
             repeated: true,
             stars: repeated.stars + 5,
             value: Math.floor(r.value * 2 * starsMultipler(repeated.stars + 5)),
+            earn: r.value
           };
         } else {
           addi = [
@@ -60,11 +62,13 @@ const addRewards = (information, packReward, setPackContains) => {
               date: repeated.date,
             },
           ];
+          earns = earns + r.value
           return {
             ...r,
             repeated: true,
             stars: repeated.stars + 1,
             value: Math.floor(r.value * 2 * starsMultipler(repeated.stars + 1)),
+            earn: r.value
           };
         }
       } else {
@@ -78,12 +82,14 @@ const addRewards = (information, packReward, setPackContains) => {
               date: repeated.date,
             },
           ];
+          earns = earns + r.value
           return {
             ...r,
             repeated: true,
             stars: repeated.stars + 5,
             value: Math.floor(r.value * 2 * starsMultipler(repeated.stars + 5)),
             update: true,
+            earn: r.value
           };
         } else {
           addi = [
@@ -95,11 +101,13 @@ const addRewards = (information, packReward, setPackContains) => {
               date: repeated.date,
             },
           ];
+          earns = earns + r.value
           return {
             ...r,
             repeated: true,
             stars: repeated.stars + 1,
             value: Math.floor(r.value * starsMultipler(repeated.stars + 1)),
+            earn: r.value
           };
         }
       }
@@ -115,6 +123,7 @@ const addRewards = (information, packReward, setPackContains) => {
           repeated: false,
           stars: null,
           value: Math.floor(r.value * 2),
+          earn: 0
         };
       } else {
         addi = [
@@ -122,14 +131,15 @@ const addRewards = (information, packReward, setPackContains) => {
           { id: r.id, stars: 0, legendary: r.legendary, date: date1 },
         ];
         count++;
-        return { ...r, repeated: false, stars: null };
+        return { ...r, repeated: false, stars: null, earn: 0 };
       }
     }
   });
   setPackContains(packReward);
   const newPjs = harem.concat(addi);
-
-  updateUserInfo2(information.uid, { ...information, pjs: newPjs });
+  console.log(earns)
+  updateUserInfo2(information.uid, { ...information, balance: information.balance + earns , pjs: newPjs });
+  setUserInfo({...information, balance: information.balance + earns })
 };
 
 export const openThisPack = ({
@@ -139,6 +149,7 @@ export const openThisPack = ({
   information,
   legendaryChance,
   minValue,
+  setUserInfo
 }) => {
   if (minValue) {
     bundle = bundle.filter((e) => e.value >= minValue);
@@ -155,6 +166,6 @@ export const openThisPack = ({
   packReward = packReward.map((r) => {
     return { ...r, legendary: legendaryCard(legendaryChance) };
   });
-  addRewards(information, packReward, setPackContains);
+  addRewards(information, packReward, setPackContains, setUserInfo);
   document.querySelector(".gacha-page-1").classList.add("to-left");
 };

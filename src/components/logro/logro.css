@@ -1,0 +1,47 @@
+.logro {
+    background-color: #0000004b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.39);
+    transition: box-shadow .3s ease, transform .3s ease;
+    cursor: pointer;
+    user-select: none;
+    width: 200px;
+    height: 160px;
+}
+
+.logro:hover {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.301);
+    transform: scale(1.07);
+}
+
+.logro > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logro > svg {
+    font-size: 69px;
+    margin-bottom: 10px;
+}
+
+.logro > h4 {
+    opacity: .8;
+    font-style: italic;
+    font-size: 18px;
+    text-align: center;
+}
+
+.logro > span > h5 {
+    color: var(--primary-color);
+    font-size: 17px;
+}
+
+.logro > span > h6 {
+    color: #04be04;
+    font-size: 17px;
+}

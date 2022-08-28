@@ -13,6 +13,7 @@ import Card from "../../components/card/card";
 import PageSwitch from "../../components/page-switch/page-switch";
 import OrderSelection from "../../components/order-selection/order-selection";
 import { createUserInfo2, getUserInfo2 } from "../../api-requests/requests";
+import { navOff } from "../../components/navigator/functions";
 
 export default function Collection() {
   const [user, setUser] = useState(undefined);
@@ -88,15 +89,9 @@ export default function Collection() {
     <>
       <Navigator />
       <LoadingFullscreen />
-      <div className="app collection-app">
+      <div className="app collection-app" onClick={navOff}>
         {userInfo && <Balance balance={userInfo.balance} />}
-        <div className="order-div">
-          <div onClick={toggleOrderBy} className="order-by white-box">
-            <h3>ORDER BY</h3>
-            <button>{order}</button>
-          </div>
-          <OrderSelection order={order} setOrder={setOrder} />
-        </div>
+        
         {bundleArray.length > 0 && (
           <PageSwitch
             page={page}
@@ -104,6 +99,13 @@ export default function Collection() {
             setPage={setPage}
           />
         )}
+        <div className="order-div">
+          <div onClick={toggleOrderBy} className="order-by white-box">
+            <h3>ORDER BY</h3>
+            <button>{order}</button>
+          </div>
+          <OrderSelection order={order} setOrder={setOrder} />
+        </div>
         <div className="cards-container">
           {bundleArray.length > 0 ? (
             bundleArray[page - 1].map((carta) => {

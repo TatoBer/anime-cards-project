@@ -14,6 +14,7 @@ import { GiBurningSkull, GiBleedingHeart } from "react-icons/gi";
 import YourBet from "../../components/your-bet/your-bet";
 import BetNotification from "../../components/bet-notification/bet-notification";
 import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+import { navOff } from "../../components/navigator/functions";
 
 export default function Casino() {
   const [user, setUser] = useState(undefined);
@@ -178,7 +179,7 @@ export default function Casino() {
     <>
       <Navigator />
       <LoadingFullscreen />
-      <div className="app casino-app">
+      <div className="app casino-app" onClick={navOff}>
         {userInfo && <Balance balance={userInfo.balance} />}
         <BetNotification bet={bet} win={win} />
         <div className="coinflip">

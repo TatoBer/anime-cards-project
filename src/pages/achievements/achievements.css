@@ -1,0 +1,17 @@
+.achievements-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 35px;
+    flex-direction: column;
+}
+
+.achievements-div > .logro {
+    margin: 15px;
+}
+
+.achievements-app > .balance {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+}

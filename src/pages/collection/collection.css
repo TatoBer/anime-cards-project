@@ -66,3 +66,31 @@
     margin: 50px;
     text-align: center;
 }
+
+@media (max-width: 800px) {
+    .collection-app > .balance {
+        position: relative;
+        top: unset;
+        right: unset;
+        min-height: 44px;
+        margin-top: 15px;
+    }
+
+    .collection-app > .order-div {
+        position: relative;
+        top: unset;
+        left: unset;
+        margin: 0;
+    }
+
+    .collection-app > .page-switch {
+        position: relative;
+        top: unset;
+        left: unset;
+        margin: 15px 0;
+    }
+
+    .collection-app > .cards-container {
+        margin: 20px 30px 40px;
+    }
+}

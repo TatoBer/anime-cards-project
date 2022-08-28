@@ -44,3 +44,34 @@
 .nav-lateral > svg {
     margin-bottom: 10px;
 }
+
+.nav-burger {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .nav-lateral {
+        position: fixed;
+        transform: translateX(-66px);
+    }
+
+    .nav-lateral.open {
+        transform: translateX(0);
+    }
+
+    .nav-burger {
+        display: flex;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background-color: #0000003f;
+        color: var(--white);
+        font-size: 35px;
+        cursor: pointer;
+        pointer-events: all;
+        padding: 5px;
+        border-radius: 15px;
+        z-index: 15001;
+    }
+    
+  }

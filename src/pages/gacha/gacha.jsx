@@ -21,6 +21,7 @@ import Balance from "../../components/balance/balance";
 import { openThisPack } from "./functions";
 import FreePack from "../../components/free-pack/free-pack";
 import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+import { navOff } from "../../components/navigator/functions";
 
 const timestampNow = () => {
   let date1 = new Date();
@@ -211,7 +212,7 @@ export default function Gacha() {
     <>
       <Navigator />
       <LoadingFullscreen />
-      <div className="app gacha-app">
+      <div className="app gacha-app" onClick={navOff}>
         <div className="gacha-page-1">
           {userInfo && (
             <>

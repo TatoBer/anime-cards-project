@@ -1,10 +1,11 @@
 import React from 'react'
 import "./navigator.css"
-import { FaHome, FaInfoCircle, FaShoppingCart } from 'react-icons/fa';
-import { CgCardHearts } from 'react-icons/cg';
+import { FaHome, FaInfoCircle } from 'react-icons/fa';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdLogout } from 'react-icons/md';
 import { Link } from "react-router-dom";
 import LogOut from '../log-out/log-out';
+import { navOpen } from './functions';
 
 export default function Navigator() {
 
@@ -26,7 +27,7 @@ export default function Navigator() {
       </div>
         <MdLogout onClick={handleLogOut} />
     </nav>
-
+    <button className='nav-burger' onClick={navOpen}><GiHamburgerMenu /></button>
     </>
   )
 }

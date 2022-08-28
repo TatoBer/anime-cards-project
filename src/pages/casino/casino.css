@@ -62,3 +62,10 @@
 .coinflip > section > .result > svg.enter {
     transform: translateY(0px);
 }
+
+@media (max-width: 510px) {
+    .app.casino-app > .coinflip {
+        transform: scale(.85);
+        background: transparent;
+    }
+}

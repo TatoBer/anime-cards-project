@@ -11,6 +11,7 @@ import Stat from "../../components/stat/stat";
 import { FaUsers, FaMoneyBillWave } from "react-icons/fa";
 import { BsStarFill, BsStars } from "react-icons/bs";
 import { createUserInfo2, getUserInfo2 } from "../../api-requests/requests";
+import { navOff } from "../../components/navigator/functions";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -73,7 +74,7 @@ export default function Stats() {
     <>
       <Navigator />
       <LoadingFullscreen />
-      <div className="app stats-app">
+      <div className="app stats-app" onClick={navOff}>
         <h1>MY STATS</h1>
         {userInfo && (
           <div className="stat-container">

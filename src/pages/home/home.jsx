@@ -17,6 +17,7 @@ import Balance from "../../components/balance/balance";
 import Button1 from "../../components/button1/button1";
 import Button3 from "../../components/button3/button3";
 import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+import { navOff } from "../../components/navigator/functions";
 
 export default function Home() {
   const [user, setUser] = useState(undefined);
@@ -77,7 +78,7 @@ export default function Home() {
     <>
       <Navigator />
       {/* <NewPj /> */}
-      <div className="app home-app">
+      <div className="app home-app" onClick={navOff}>
         <nav className="home-nav">
           {userInfo && (
             <Balance balance={userInfo.balance} onClick={addBalance} />

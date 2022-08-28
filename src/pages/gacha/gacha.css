@@ -36,6 +36,7 @@
   height: 100vh;
   transform: translateX(100vw);
   transition: transform 0.3s ease;
+  flex-wrap: wrap;
 }
 
 .gacha-page-1.to-left + .gacha-page-2 {
@@ -50,6 +51,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .gacha-page-2 > section > span > .control {
@@ -64,14 +66,14 @@
 }
 
 .gacha-page-2 > section > span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .control + .control {
-    margin-top: 35px;
+  margin-top: 35px;
 }
 
 section > span > .control > svg {
@@ -82,15 +84,14 @@ section > span > .control > svg {
   color: var(--white);
   background: var(--bg);
   animation: var(--bg-animation);
-  transition: box-shadow 0.2s ease, filter .2s ease;
+  transition: box-shadow 0.2s ease, filter 0.2s ease;
   cursor: pointer;
 }
 
 section > span > .control > svg.disabled {
-    filter: grayscale(.8);
-    pointer-events: none;
+  filter: grayscale(0.8);
+  pointer-events: none;
 }
-
 
 section > span > .control > svg:hover {
   box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
@@ -110,24 +111,45 @@ section > span > .control > p {
 }
 
 .gacha-page-2 > section > h4 {
-    font-size: 90px;
-    opacity: .5;
-    height: 370px;
-    width: 290px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid var(--primary-color);
-    border-radius: 10px 10px 30px 30px;
-    transition: all .2s ease;
+  font-size: 90px;
+  opacity: 0.5;
+  height: 370px;
+  width: 290px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--primary-color);
+  border-radius: 10px 10px 30px 30px;
+  transition: all 0.2s ease;
 }
 
 .gacha-page-2 > section > h4.off {
-    transform: scale(0);
+  transform: scale(0);
 }
 
 .cardback {
-    pointer-events: none;
-    position: absolute;
-    transform: scale(0);
+  pointer-events: none;
+  position: absolute;
+  transform: scale(0);
+}
+
+@media (max-width: 600px) {
+  .gacha-page-2 > section {
+    flex-direction: column;
+  }
+
+  .gacha-page-2 > section > span {
+    flex-direction: row;
+  }
+
+  .gacha-page-2 > section > span > .control {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 19px;
+    margin: 20px;
+  }
 }

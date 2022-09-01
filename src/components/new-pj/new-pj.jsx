@@ -1,5 +1,5 @@
 import React from "react";
-import { addNewPj } from "../../firebase/client";
+import { createPj2 } from "../../api-requests/requests";
 
 export default function NewPj() {
   const sendNewPj = (e) => {
@@ -9,11 +9,13 @@ export default function NewPj() {
     const img = document.querySelector("input[name=img]");
     const value = document.querySelector("input[name=value]");
 
-    addNewPj({name: name.value, serie: serie.value, img: img.value, value: value.value})
+    const newValue = (value.value*10)+(Math.round(Math.random()*10))
+
+    createPj2({name: name.value, serie: serie.value, img: img.value, value: newValue})
 
     name.value = "";
-    serie.value = "";
-    img.value = "";
+    // serie.value = "";
+    // img.value = "";
     value.value = "";
   };
 

@@ -1,9 +1,7 @@
 import React from "react";
 import "../../components/home-nav/home-nav.css";
 import { useState, useEffect } from "react";
-import {
-  onAuthStateChanged,
-} from "../../firebase/client";
+import { onAuthStateChanged } from "../../firebase/client";
 import { useNavigate, Link } from "react-router-dom";
 import Navigator from "../../components/navigator/navigator";
 import "./casino.css";
@@ -13,7 +11,11 @@ import Coin from "../../components/coin/coin";
 import { GiBurningSkull, GiBleedingHeart } from "react-icons/gi";
 import YourBet from "../../components/your-bet/your-bet";
 import BetNotification from "../../components/bet-notification/bet-notification";
-import { createUserInfo2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+import {
+  createUserInfo2,
+  getUserInfo2,
+  updateUserInfo2,
+} from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
 
 export default function Casino() {
@@ -35,11 +37,11 @@ export default function Casino() {
     } else if (user) {
       getUserInfo2(user.uid).then((res) => {
         if (!res) {
-          createUserInfo2(user.uid).then(()=>{
-            getUserInfo2(user.uid).then(res=>{
+          createUserInfo2(user.uid).then(() => {
+            getUserInfo2(user.uid).then((res) => {
               setUserInfo(res);
-             })
-          });      
+            });
+          });
         } else {
           setUserInfo(res);
         }
@@ -96,42 +98,45 @@ export default function Casino() {
   };
 
   const handleCoinWin = async (bet, info) => {
-      const newBalance = info.balance + bet;
-      const totalWinned = info.achievements.casinoWins + bet
-      await updateUserInfo2(user.uid, { balance: newBalance, achievements: {...info.achievements, casinoWins: totalWinned} });
-      await getUserInfo2(user.uid).then((res) => {
-        setUserInfo(res);
-      });
-      const betNotification = document.querySelector(".bet-notification");
-      setBet(bet);
-      setWin(true);
-      betNotification.classList.remove("red");
-      betNotification.classList.add("enter");
-      setTimeout(() => {
-        betNotification.classList.remove("enter");
-      }, 700);
-      setTimeout(() => {
-        enableBets();
-      }, 500);
+    const newBalance = info.balance + bet;
+    const totalWinned = info.achievements.casinoWins + bet;
+    await updateUserInfo2(user.uid, {
+      balance: newBalance,
+      achievements: { ...info.achievements, casinoWins: totalWinned },
+    });
+    await getUserInfo2(user.uid).then((res) => {
+      setUserInfo(res);
+    });
+    const betNotification = document.querySelector(".bet-notification");
+    setBet(bet);
+    setWin(true);
+    betNotification.classList.remove("red");
+    betNotification.classList.add("enter");
+    setTimeout(() => {
+      betNotification.classList.remove("enter");
+    }, 700);
+    setTimeout(() => {
+      enableBets();
+    }, 500);
   };
 
   const handleCoinLose = async (bet, info) => {
-      const newBalance = info.balance - bet;
-      await updateUserInfo2(user.uid, { balance: newBalance });
-      await getUserInfo2(user.uid).then((res) => {
-        setUserInfo(res);
-      });
-      const betNotification = document.querySelector(".bet-notification");
-      setBet(bet);
-      setWin(false);
-      betNotification.classList.add("red");
-      betNotification.classList.add("enter");
-      setTimeout(() => {
-        betNotification.classList.remove("enter");
-      }, 700);
-      setTimeout(() => {
-        enableBets();
-      }, 500);
+    const newBalance = info.balance - bet;
+    await updateUserInfo2(user.uid, { balance: newBalance });
+    await getUserInfo2(user.uid).then((res) => {
+      setUserInfo(res);
+    });
+    const betNotification = document.querySelector(".bet-notification");
+    setBet(bet);
+    setWin(false);
+    betNotification.classList.add("red");
+    betNotification.classList.add("enter");
+    setTimeout(() => {
+      betNotification.classList.remove("enter");
+    }, 700);
+    setTimeout(() => {
+      enableBets();
+    }, 500);
   };
 
   const goBet = async (bet, win, info) => {
@@ -175,13 +180,17 @@ export default function Casino() {
     });
   };
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <>
       <Navigator />
       <LoadingFullscreen />
       <div className="app casino-app" onClick={navOff}>
         {userInfo && <Balance balance={userInfo.balance} />}
-        <BetNotification bet={bet} win={win} />
+        <BetNotification bet={numberWithCommas(bet)} win={win} />
         <div className="coinflip">
           <YourBet onChange={betUpdating} max={maxBet} />
           <section>

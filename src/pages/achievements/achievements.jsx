@@ -52,7 +52,7 @@ export default function Achievements() {
       <Navigator />
       <LoadingFullscreen />
       <div className="app achievements-app" onClick={navOff}>
-        {userInfo && (
+        {/* {userInfo && (
           <>
             <Balance balance={userInfo.balance} />
             <div className="achievements-div">
@@ -70,7 +70,8 @@ export default function Achievements() {
               <Logro />
             </div>
           </>
-        )}
+        )} */}
+        <h2>COMING SOON!</h2>
       </div>
     </>
   );

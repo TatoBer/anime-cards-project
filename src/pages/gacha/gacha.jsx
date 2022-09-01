@@ -176,7 +176,7 @@ export default function Gacha() {
 
   const openPackForest = () => {
     setButon(false);
-    handlePackSelection(100000, 5, 1);
+    handlePackSelection(75000, 5, 1);
     setTimeout(() => {
       setButon(true);
     }, 2000);
@@ -203,7 +203,7 @@ export default function Gacha() {
       },
     };
     await updateUserInfo2(user.uid, { achievements: newUserInfo.achievements });
-    handlePackSelection(0, 3, 0.03, 0);
+    handlePackSelection(0, 6, 0.03, 0);
     setTimeout(() => {
       setButon(true);
     }, 2000);
@@ -243,8 +243,8 @@ export default function Gacha() {
                   <GiBeastEye />
                 </Sobre>
                 <Sobre
-                  dis={userInfo.balance >= 100000}
-                  price={100000}
+                  dis={userInfo.balance >= 75000}
+                  price={75000}
                   buton={buton}
                   bg="linear-gradient(220.55deg, #FF5EEF 0%, #456EFF 100%)"
                   click={openPackForest}

@@ -2,8 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 35px;
-    flex-direction: column;
+    margin: 55px;
+    margin-top: 80px;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .achievements-div > .logro {
@@ -13,5 +15,10 @@
 .achievements-app > .balance {
     position: fixed;
     top: 15px;
-    right: 15px;
+}
+
+.achievements-app > h2 {
+    margin: 50px;
+    opacity: .7;
+    font-size: 50px;
 }

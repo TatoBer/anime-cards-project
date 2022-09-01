@@ -55,7 +55,7 @@ h1, h2, h3, h4, div, span, p, strong, time {
   --white: #f0f8ff;
   --semi-black: #272249;
   --bg: linear-gradient(220.55deg, #4063BC 0%, #63076b 100%);
-  --bg-animation: gradient 20s ease infinite;
+  --bg-animation: gradient 10s ease infinite;
   --primary-color: #9486e6;
   --legendary: #ecbf43;
 }
@@ -106,4 +106,9 @@ a {
 
 *::selection {
   background-color: var(--primary-color);
+}
+
+.add-app > .card {
+  user-select: unset;
+  cursor: default;
 }

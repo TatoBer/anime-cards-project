@@ -43,7 +43,7 @@ export const updateUserInfo2 = async (uid, info) => {
 
 export const getAllPjs2 = async () => {
   const response = await axios
-    .get("https://anime-cards-app.herokuapp.com/api/characters/")
+    .get("https://anime-cards-app.herokuapp.com/api/character/")
     .then((res) => {
       return res.data;
     })
@@ -59,5 +59,15 @@ export const createPj2 = async (pj) => {
       return res.data;
     })
     .catch((err) => console.log("ERROR", err));
+  return response;
+};
+
+export const updatePj2 = async (pj) => {
+  const response = await axios
+    .put("https://anime-cards-app.herokuapp.com/api/character/", pj)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
   return response;
 };

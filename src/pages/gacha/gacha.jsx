@@ -194,6 +194,7 @@ export default function Gacha() {
     setButon(false);
     const newUserInfo = {
       ...userInfo,
+      balance: userInfo.balance + 500,
       achievements: {
         ...userInfo.achievements,
         freeChest: {
@@ -202,7 +203,7 @@ export default function Gacha() {
         },
       },
     };
-    await updateUserInfo2(user.uid, { achievements: newUserInfo.achievements });
+    await updateUserInfo2(user.uid, {balance: newUserInfo.balance, achievements: newUserInfo.achievements });
     handlePackSelection(0, 6, 0.03, 0);
     setTimeout(() => {
       setButon(true);

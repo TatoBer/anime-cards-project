@@ -33,7 +33,6 @@ export default function Login() {
       <MainTittle />
       <span className="login-span">
         <h2>Welcome! Log in and start collecting anime cards</h2>
-        <p>login para comenzar a coleccionar</p>
       </span>
       <div className="login-div white-box">
         <Button1 onClick={loginWithGoogle} > LOGIN <BsGoogle /></Button1>

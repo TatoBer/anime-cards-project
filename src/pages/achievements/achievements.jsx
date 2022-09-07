@@ -4,10 +4,7 @@ import Navigator from "../../components/navigator/navigator";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "../../firebase/client";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
-import Logro from "../../components/logro/logro";
 import "./achievements.css";
-import { GiClubs } from "react-icons/gi";
-import Balance from "../../components/balance/balance";
 import { navOff } from "../../components/navigator/functions";
 
 export default function Achievements() {

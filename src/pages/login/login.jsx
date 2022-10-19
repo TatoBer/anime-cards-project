@@ -7,15 +7,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
 import MainTittle from "../../components/main-tittle/main-tittle";
+import useUser from "../../hooks/useUser";
 
 export default function Login() {
 
-  const [user, setUser] = useState(undefined)
+  const {user} = useUser(false)
   const navigate = useNavigate()
-
-  useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-  }, []);
 
   useEffect(() => {
     if (user) {

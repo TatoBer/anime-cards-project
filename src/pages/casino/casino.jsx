@@ -1,8 +1,6 @@
 import React from "react";
 import "../../components/home-nav/home-nav.css";
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "../../firebase/client";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 import Navigator from "../../components/navigator/navigator";
 import "./casino.css";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
@@ -12,50 +10,17 @@ import { GiBurningSkull, GiBleedingHeart } from "react-icons/gi";
 import YourBet from "../../components/your-bet/your-bet";
 import BetNotification from "../../components/bet-notification/bet-notification";
 import {
-  createUserInfo2,
   getUserInfo2,
   updateUserInfo2,
 } from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
+import useUser from "../../hooks/useUser";
 
 export default function Casino() {
-  const [user, setUser] = useState(undefined);
-  const [userInfo, setUserInfo] = useState(undefined);
+  const {userInfo, user, fetchUserInfo, handleBet} = useUser()
   const [flipBet, setFlipBet] = useState(0);
   const [bet, setBet] = useState(0);
   const [win, setWin] = useState(true);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-  }, []);
-
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login");
-    } else if (user) {
-      getUserInfo2(user.uid).then((res) => {
-        if (!res) {
-          createUserInfo2(user.uid).then(() => {
-            getUserInfo2(user.uid).then((res) => {
-              setUserInfo(res);
-            });
-          });
-        } else {
-          setUserInfo(res);
-        }
-      });
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (userInfo) {
-      setTimeout(() => {
-        document.querySelector(".loading-fullscreen").classList.add("off");
-      }, 200);
-    }
-  }, [userInfo]);
 
   const betUpdating = () => {
     setFlipBet(
@@ -104,9 +69,7 @@ export default function Casino() {
       balance: newBalance,
       achievements: { ...info.achievements, casinoWins: totalWinned },
     });
-    await getUserInfo2(user.uid).then((res) => {
-      setUserInfo(res);
-    });
+    fetchUserInfo()
     const betNotification = document.querySelector(".bet-notification");
     setBet(bet);
     setWin(true);
@@ -123,9 +86,7 @@ export default function Casino() {
   const handleCoinLose = async (bet, info) => {
     const newBalance = info.balance - bet;
     await updateUserInfo2(user.uid, { balance: newBalance });
-    await getUserInfo2(user.uid).then((res) => {
-      setUserInfo(res);
-    });
+    fetchUserInfo()
     const betNotification = document.querySelector(".bet-notification");
     setBet(bet);
     setWin(false);
@@ -151,33 +112,13 @@ export default function Casino() {
   const betMoon = async () => {
     disableBets();
     const bet = flipBet;
-    await getUserInfo2(user.uid).then((res) => {
-      setUserInfo(res);
-      if (res.balance >= bet) {
-        goBet(bet, "moon", res);
-      } else {
-        setTimeout(() => {
-          enableBets();
-        }, 500);
-        console.log("NO TE ALCANZA!");
-      }
-    });
+    handleBet(bet, goBet, enableBets, "moon")
   };
 
   const betSun = async () => {
     disableBets();
     const bet = flipBet;
-    await getUserInfo2(user.uid).then((res) => {
-      setUserInfo(res);
-      if (res.balance >= bet) {
-        goBet(bet, "sun", res);
-      } else {
-        setTimeout(() => {
-          enableBets();
-        }, 500);
-        console.log("NO TE ALCANZA!");
-      }
-    });
+    handleBet(bet, goBet, enableBets, "sun")
   };
 
   function numberWithCommas(x) {

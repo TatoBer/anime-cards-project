@@ -1,57 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Navigator from "../../components/navigator/navigator";
-import {
-  getUserInfo,
-  onAuthStateChanged,
-} from "../../firebase/client";
-import { useNavigate } from "react-router-dom";
 import "./stats.css";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
 import Stat from "../../components/stat/stat";
 import { FaUsers, FaMoneyBillWave } from "react-icons/fa";
 import { BsStarFill, BsStars } from "react-icons/bs";
-import { createUserInfo2, getUserInfo2 } from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
+import useUser from "../../hooks/useUser";
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 export default function Stats() {
-  const [user, setUser] = useState(undefined);
-  const [userInfo, setUserInfo] = useState(undefined);
-
-  useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-  }, []);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login");
-    } else if (user) {
-      getUserInfo2(user.uid).then((res) => {
-        if (!res) {
-          createUserInfo2(user.uid).then(()=>{
-            getUserInfo2(user.uid).then((res) => {
-              setUserInfo(res);
-            });
-          });
-        } else {
-          setUserInfo(res);
-        }
-      });
-    }
-  }, [user]);
-
-  useEffect(() => {
-    if (userInfo) {
-      setTimeout(() => {
-        document.querySelector(".loading-fullscreen").classList.add("off");
-      }, 200);
-    }
-  }, [userInfo]);
+  const {userInfo} = useUser()
 
   const userStars = () => {
     let stars = 0;

@@ -24,34 +24,12 @@ import {
 import { navOff } from "../../components/navigator/functions";
 import MainTittle from "../../components/main-tittle/main-tittle";
 import NewPj from "../../components/new-pj/new-pj";
+import useUser from "../../hooks/useUser";
 
 export default function Home() {
-  const [user, setUser] = useState(undefined);
-  const [userInfo, setUserInfo] = useState(undefined);
 
-  useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-  }, []);
-
+  const {userInfo} = useUser()
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login");
-    } else if (user) {
-      getUserInfo2(user.uid).then((res) => {
-        if (!res) {
-          createUserInfo2(user.uid).then(() => {
-            getUserInfo2(user.uid).then((res) => {
-              setUserInfo(res);
-            });
-          });
-        } else {
-          setUserInfo(res);
-        }
-      });
-    }
-  }, [user]);
 
   useEffect(() => {
     if (userInfo) {
@@ -60,12 +38,6 @@ export default function Home() {
       }, 200);
     }
   }, [userInfo]);
-
-  const addBalance = () => {
-    updateUserInfo2(user.uid, { balance: userInfo.balance + 1000 }).then(() => {
-      getUserInfo2(user.uid).then((res) => setUserInfo(res));
-    });
-  };
 
   const goToCollection = (e) => {
     e.preventDefault();

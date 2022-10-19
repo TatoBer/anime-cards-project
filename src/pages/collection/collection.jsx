@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
 import Navigator from "../../components/navigator/navigator";
-import { onAuthStateChanged } from "../../firebase/client";
-import { useNavigate } from "react-router-dom";
 import Balance from "../../components/balance/balance";
 import "./collection.css";
 import { displayPjs } from "./functions";
@@ -10,48 +8,23 @@ import Card from "../../components/card/card";
 import PageSwitch from "../../components/page-switch/page-switch";
 import OrderSelection from "../../components/order-selection/order-selection";
 import {
-  createUserInfo2,
   getAllPjs2,
-  getUserInfo2,
 } from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
+import useUser from "../../hooks/useUser";
 
 export default function Collection() {
-  const [user, setUser] = useState(undefined);
-  const [userInfo, setUserInfo] = useState(undefined);
+  const { userInfo, user } = useUser(false);
   const [allPjs, setAllPjs] = useState([]);
   const [bundleArray, setBundleArray] = useState([]);
   const [page, setPage] = useState(1);
   const [order, setOrder] = useState(undefined);
 
   useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-  }, []);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login");
-    } else if (user) {
-      getUserInfo2(user.uid).then((res) => {
-        if (!res) {
-          createUserInfo2(user.uid).then(() => {
-            getUserInfo2(user.uid).then((res) => {
-              setUserInfo(res);
-              getAllPjs2().then((allP) => {
-                setAllPjs(allP);
-                setOrder("VALUE DESC.");
-              });
-            });
-          });
-        } else {
-          setUserInfo(res);
-          getAllPjs2().then((allP) => {
-            setAllPjs(allP);
-            setOrder("VALUE DESC.");
-          });
-        }
+    if (user) {
+      getAllPjs2().then((allP) => {
+        setAllPjs(allP);
+        setOrder("VALUE DESC.");
       });
     }
   }, [user]);

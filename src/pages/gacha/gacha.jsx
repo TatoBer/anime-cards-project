@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Card from "../../components/card/card";
 import LoadingFullscreen from "../../components/loadingFullscreen/loadingFullscreen";
 import Navigator from "../../components/navigator/navigator";
 import Sobre from "../../components/sobre/sobre";
-import {
-  getAllPjs,
-  onAuthStateChanged,
-} from "../../firebase/client";
 import "./gacha.css";
 import {
   GiBeastEye,
@@ -20,8 +15,9 @@ import { BiArrowBack } from "react-icons/bi";
 import Balance from "../../components/balance/balance";
 import { openThisPack } from "./functions";
 import FreePack from "../../components/free-pack/free-pack";
-import { createUserInfo2, getAllPjs2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
+import { getAllPjs2, getUserInfo2, updateUserInfo2 } from "../../api-requests/requests";
 import { navOff } from "../../components/navigator/functions";
+import useUser from "../../hooks/useUser";
 
 const timestampNow = () => {
   let date1 = new Date();
@@ -30,8 +26,7 @@ const timestampNow = () => {
 };
 
 export default function Gacha() {
-  const [user, setUser] = useState(undefined);
-  const [userInfo, setUserInfo] = useState(undefined);
+  const {user, userInfo, setUserInfo} = useUser(false)
   const [allPjs, setAllPjs] = useState([]);
   const [packWin, setPackWin] = useState(null);
   const [buton, setButon] = useState(true);
@@ -44,29 +39,6 @@ export default function Gacha() {
     },
   ]);
 
-  useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-  }, []);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user === null) {
-      navigate("/login");
-    } else if (user) {
-      getUserInfo2(user.uid).then((res) => {
-        if (!res) {
-          createUserInfo2(user.uid).then(() => {
-            getUserInfo2(user.uid).then((res) => {
-              setUserInfo(res);
-            });
-          });
-        } else {
-          setUserInfo(res);
-        }
-      });
-    }
-  }, [user]);
 
   useEffect(() => {
     if (userInfo) {
@@ -76,10 +48,6 @@ export default function Gacha() {
       getAllPjs2().then((res) => setAllPjs(res));
     }
   }, [userInfo]);
-
-  const seeAllPjs = () => {
-    console.log(allPjs);
-  };
 
   const packLeave = () => {
     document.querySelector(".gacha-page-1").classList.remove("to-left");

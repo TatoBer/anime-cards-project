@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getUserInfo2 = async (uid) => {
   const response = await axios
-    .get(`https://anime-cards-app.herokuapp.com/api/users/${uid}`)
+    .get(`https://anime-cards-a-p-i.vercel.app/api/users/${uid}`)
     .then((res) => {
       return res.data;
     })
@@ -13,7 +13,7 @@ export const getUserInfo2 = async (uid) => {
 
 export const createUserInfo2 = async (uid) => {
   const response = await axios
-    .post("https://anime-cards-app.herokuapp.com/api/users/", {
+    .post("https://anime-cards-a-p-i.vercel.app/api/users/", {
       uid: uid,
       configs: {},
       pjs: [],
@@ -33,7 +33,7 @@ export const createUserInfo2 = async (uid) => {
 
 export const updateUserInfo2 = async (uid, info) => {
   const response = await axios
-    .put("https://anime-cards-app.herokuapp.com/api/users/", { ...info, uid })
+    .put("https://anime-cards-a-p-i.vercel.app/api/users/", { ...info, uid })
     .then((res) => {
       return res;
     })
@@ -43,7 +43,7 @@ export const updateUserInfo2 = async (uid, info) => {
 
 export const getAllPjs2 = async () => {
   const response = await axios
-    .get("https://anime-cards-app.herokuapp.com/api/character/")
+    .get("https://anime-cards-a-p-i.vercel.app/api/character/")
     .then((res) => {
       return res.data;
     })
@@ -54,7 +54,7 @@ export const getAllPjs2 = async () => {
 
 export const createPj2 = async (pj) => {
   const response = await axios
-    .post("https://anime-cards-app.herokuapp.com/api/characters/", pj)
+    .post("https://anime-cards-a-p-i.vercel.app/api/characters/", pj)
     .then((res) => {
       return res.data;
     })
@@ -64,7 +64,7 @@ export const createPj2 = async (pj) => {
 
 export const updatePj2 = async (pj) => {
   const response = await axios
-    .put("https://anime-cards-app.herokuapp.com/api/character/", pj)
+    .put("https://anime-cards-a-p-i.vercel.app/api/character/", pj)
     .then((res) => {
       console.log(res);
     })
